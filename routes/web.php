@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,49 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// Admin Route
+// Sementara, nanti bisa diubah
+
+// Reservation Route
+Route::get('/reservation', function () {
+    return view('admin.reservationIndex');
+});
+Route::get('/reservationStatus', function () {
+    return view('admin.reservationStatusIndex');
+});
+
+// Service Route
+Route::get('/service', function () {
+    return view('admin.serviceIndex');
+});
+Route::get('/serviceCategory', function () {
+    return view('admin.serviceCategoryIndex');
+});
+
+// User Route
+Route::get('/admin', function () {
+    return view('admin.adminIndex');
+});
+Route::get('/customer', function () {
+    return view('admin.customerIndex');
+});
+
+// Message Route
+Route::get('/message', function () {
+    return view('admin.messageIndex');
+});
+Route::get('/selectedMessage', function () {
+    return view('admin.selectedMessageIndex');
+});
+
+// Gallery Route
+Route::get('/gallery', function () {
+    return view('admin.galleryIndex');
+});
+
+// Profile Route
+Route::get('/profile', function () {
+    return view('admin.profile');
+});

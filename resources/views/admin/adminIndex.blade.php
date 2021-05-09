@@ -5,12 +5,13 @@
         <div class="page-header-title">
             <i class="icofont icofont-table bg-c-blue"></i>
             <div class="d-inline">
-                <h4>Judul Tabel</h4>
+                <h4>List of Admin</h4>
+                <span>Here list of the admin</span>
             </div>
         </div>
     </div>
     <div class="card-header">
-        <h5>Basic table</h5>
+        <h5>Admin Table</h5>
         <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
         <div class="card-header-right">
             <ul class="list-unstyled card-option">
@@ -66,5 +67,4 @@
         </div>
     </div>
 </div>
-<!-- Basic table card end -->
 @endsection

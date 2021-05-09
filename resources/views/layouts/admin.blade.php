@@ -103,7 +103,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{route('home')}}">
                                     <span><i class="icofont icofont-home"></i> Home</span>
                                 </a>
                             </li>
@@ -118,12 +118,12 @@
                                 </a>
                                 <ul class="show-notification profile-notification">
                                     <li>
-                                        <a href="#">
+                                        <a href="{{url('profile')}}">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="auth-normal-sign-in.html">
+                                        <a href="{{route('logout')}}">
                                             <i class="ti-layout-sidebar-left"></i> Logout
                                         </a>
                                     </li>
@@ -151,7 +151,7 @@
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
-                                            <a href="#">
+                                            <a href="{{url('reservation')}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext"
                                                     data-i18n="nav.basic-components.alert">All</span>
@@ -159,7 +159,7 @@
                                             </a>
                                         </li>
                                         <li class=" ">
-                                            <a href="#">
+                                            <a href="{{url('reservationStatus')}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext"
                                                     data-i18n="nav.basic-components.breadcrumbs">Done</span>
@@ -176,16 +176,16 @@
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
-                                            <a href="#">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                            <a href="{{url('serviceCategory')}}">
+                                                <span class=" pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext"
                                                     data-i18n="nav.basic-components.alert">Service Category</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" ">
-                                            <a href="#">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                            <a href="{{url('service')}}">
+                                                <span class=" pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext"
                                                     data-i18n="nav.basic-components.breadcrumbs">Service</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -201,16 +201,16 @@
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
-                                            <a href="#">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                            <a href="{{url('admin')}}">
+                                                <span class=" pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext"
                                                     data-i18n="nav.basic-components.alert">Admin</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" ">
-                                            <a href="#">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                            <a href="{{url('customer')}}">
+                                                <span class=" pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext"
                                                     data-i18n="nav.basic-components.breadcrumbs">Customer</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -226,16 +226,16 @@
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
-                                            <a href="#">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                            <a href="{{url('message')}}">
+                                                <span class=" pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">All
                                                     Message</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" ">
-                                            <a href="#">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                            <a href="{{url('selectedMessage')}}">
+                                                <span class=" pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext"
                                                     data-i18n="nav.basic-components.breadcrumbs">Selected Message</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -244,8 +244,8 @@
                                     </ul>
                                 </li>
                                 <li class="pcoded">
-                                    <a href="#">
-                                        <span class="pcoded-micon"><i class="ti-gallery"></i><b>D</b></span>
+                                    <a href="{{url('gallery')}}">
+                                        <span class=" pcoded-micon"><i class="ti-gallery"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Gallery</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
