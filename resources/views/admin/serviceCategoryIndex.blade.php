@@ -73,7 +73,7 @@
                     </div>
                     <div>
                         <a type="button" id="close" class="btn btn-primary btn-outline-primary"
-                            onclick="hideForm()">Close</a>
+                            onclick="hideForm()">Back</a>
                         <button type="submit" class="btn btn-primary"
                             onclick="$('#formAddCategoryService').hide();">Submit</button>
                     </div>
@@ -100,9 +100,9 @@
                             <td>{{$cs->name}}</td>
                             <td><img width=" 80px" src="{{asset('storage/'.$cs->image) }}"></td>
                             <td>
-                                <button class="btn btn-warning" data-name={{$cs->name}} data-image={{$cs->image}}
-                                    data-id={{$cs->category_service_id}} data-toogle="modal"
-                                    data-target="#EditCategoryService"><i class="ti-marker-alt"></i></button>
+                                <a type="button" class="btn btn-warning"
+                                    href="{{ route('categoryService.edit', $cs->category_service_id) }}"><i
+                                        class="ti-marker-alt"></i></a>
                                 <button class="btn btn-danger"><i class="ti-trash"></i></button>
                                 {{-- <button class="btn btn-inverse" data-toggle="tooltip" data-original-title="lihat detail"><i
                                     class="ti-zoom-in"></i>Show</button> --}}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CategoryService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryServiceController extends Controller
 {
@@ -51,15 +52,36 @@ class CategoryServiceController extends Controller
     }
 
 
-    public function edit(CategoryService $categoryService)
+    public function edit($id_categoryService)
     {
-        //
+        $categoryService = CategoryService::where('category_service_id', $id_categoryService)
+        ->first();
+        return view('admin.serviceCategoryEdit', ['categoryService' => $categoryService]);
     }
 
 
-    public function update(Request $request, CategoryService $categoryService)
+    public function update(Request $request,  $idcs)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'image' => 'required',
+
+        ]);
+
+        $categoryService = CategoryService::where('category_service_id', $idcs)
+            ->first();
+
+        if($categoryService->image && file_exists(storage_path('app/public/' . $categoryService->image))) {
+            Storage::delete('public/' . $categoryService->image);
+        }
+
+        $image = $request->file('image')->store('images', 'public');
+        $categoryService->name = $request->get('name');
+        $categoryService->image = $image;
+        $categoryService->save();
+
+        return redirect()->route('categoryService.index')
+            ->with('success', 'Category Service seccesfully Updated');
     }
 
 

@@ -84,7 +84,8 @@
                             <i class="ti-menu"></i>
                         </a>
                         <a href="index.html">
-                            <img class="img-fluid" width="130px" src="assetsAdmin/images/logo.png" alt="Theme-Logo" />
+                            <img class="img-fluid" width="130px" src="{{asset('assets/assetsAdmin/images/logo.png')}}"
+                                alt="Theme-Logo" />
                         </a>
                         <a class="mobile-options">
                             <i class="ti-more"></i>
@@ -112,7 +113,7 @@
                         <ul class="nav-right">
                             <li class="user-profile header-notification">
                                 <a href="#!">
-                                    <img src="assetsAdmin/images/avatar-4.jpg" class="img-radius"
+                                    <img src="{{asset('assets/assetsAdmin/images/avatar-4.jpg')}}" class="img-radius"
                                         alt="User-Profile-Image">
                                     <span>John Doe</span>
                                     <i class="ti-angle-down"></i>
