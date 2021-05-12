@@ -1,5 +1,16 @@
 @extends('layouts.admin')
 @section('content')
+<div>
+    @if ($message = Session::get('fail'))
+    <div class="alert alert-warning">
+        <p>{{ $message }}</p>
+    </div>
+    @elseif ($message = Session::get('success'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
+    @endif
+</div>
 <div class="page-body">
     <div class="card">
         <div class="mt-3 ml-3">
@@ -98,12 +109,18 @@
                         <tr>
                             <th scope="row">{{$no++}}</th>
                             <td>{{$cs->name}}</td>
-                            <td><img width=" 80px" src="{{asset('storage/'.$cs->image) }}"></td>
-                            <td>
+                            <td><img width="50px" height="50px" src="{{asset('storage/'.$cs->image) }}"></td>
+                            <td style="display: flex">
                                 <a type="button" class="btn btn-warning"
                                     href="{{ route('categoryService.edit', $cs->category_service_id) }}"><i
                                         class="ti-marker-alt"></i></a>
-                                <button class="btn btn-danger"><i class="ti-trash"></i></button>
+                                <form style="margin-left: 5px"
+                                    action="{{ route('categoryService.destroy', $cs->category_service_id) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger"><i class="ti-trash"></i></button>
+                                </form>
                                 {{-- <button class="btn btn-inverse" data-toggle="tooltip" data-original-title="lihat detail"><i
                                     class="ti-zoom-in"></i>Show</button> --}}
                             </td>

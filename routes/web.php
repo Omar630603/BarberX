@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryServiceController;
+use App\Http\Controllers\ServiceController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +37,7 @@ Route::get('/reservationStatus', function () {
 });
 
 // Service Route
-Route::get('/service', function () {
-    return view('admin.serviceIndex');
-});
+Route::resource('service', ServiceController::class);
 Route::resource('categoryService', CategoryServiceController::class);
 
 // User Route

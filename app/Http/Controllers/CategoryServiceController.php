@@ -42,7 +42,6 @@ class CategoryServiceController extends Controller
 
         return redirect()->route('categoryService.index')
             ->with('success', 'New Category Service Added Succesfully');
-
     }
 
 
@@ -55,7 +54,7 @@ class CategoryServiceController extends Controller
     public function edit($id_categoryService)
     {
         $categoryService = CategoryService::where('category_service_id', $id_categoryService)
-        ->first();
+            ->first();
         return view('admin.serviceCategoryEdit', ['categoryService' => $categoryService]);
     }
 
@@ -71,7 +70,7 @@ class CategoryServiceController extends Controller
         $categoryService = CategoryService::where('category_service_id', $idcs)
             ->first();
 
-        if($categoryService->image && file_exists(storage_path('app/public/' . $categoryService->image))) {
+        if ($categoryService->image && file_exists(storage_path('app/public/' . $categoryService->image))) {
             Storage::delete('public/' . $categoryService->image);
         }
 
@@ -87,6 +86,8 @@ class CategoryServiceController extends Controller
 
     public function destroy(CategoryService $categoryService)
     {
-
+        $categoryService->delete();
+        return redirect()->route('categoryService.index')
+            ->with('success', 'Category Service seccesfully Deleted');
     }
 }
