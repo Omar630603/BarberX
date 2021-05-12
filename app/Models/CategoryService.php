@@ -12,7 +12,10 @@ class CategoryService extends Model
     protected $primaryKey = 'category_service_id';
 
     protected $fillable = [
+        'category_service_id',
         'name',
         'image',
     ];
+
+
 }

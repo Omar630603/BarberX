@@ -17,19 +17,20 @@
     <meta name="keywords"
         content="flat ui, admin  Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="CodedThemes">
+    <meta name="csrf-token" content="csrf_token()">
     <!-- Favicon icon -->
-    <link rel="icon" href="assetsAdmin/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{asset('assets/assetsAdmin/images/favicon.ico')}}" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
     <!-- Required Fremwork -->
-    <link rel="stylesheet" type="text/css" href="assetsAdmin/css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/assetsAdmin/css/bootstrap/css/bootstrap.min.css')}}">
     <!-- themify-icons line icon -->
-    <link rel="stylesheet" type="text/css" href="assetsAdmin/icon/themify-icons/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/assetsAdmin/icon/themify-icons/themify-icons.css')}}">
     <!-- ico font -->
-    <link rel="stylesheet" type="text/css" href="assetsAdmin/icon/icofont/css/icofont.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/assetsAdmin/icon/icofont/css/icofont.css')}}">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assetsAdmin/css/style.css">
-    <link rel="stylesheet" type="text/css" href="assetsAdmin/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/assetsAdmin/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/assetsAdmin/css/jquery.mCustomScrollbar.css')}}">
 </head>
 
 <body>
@@ -176,7 +177,7 @@
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
-                                            <a href="{{url('serviceCategory')}}">
+                                            <a href="{{route('categoryService.index')}}">
                                                 <span class=" pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext"
                                                     data-i18n="nav.basic-components.alert">Service Category</span>
@@ -282,22 +283,23 @@
     </div>
     <!-- Warning Section Ends -->
     <!-- Required Jquery -->
-    <script type="text/javascript" src="assetsAdmin/js/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="assetsAdmin/js/jquery-ui/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="assetsAdmin/js/popper.js/popper.min.js"></script>
-    <script type="text/javascript" src="assetsAdmin/js/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/jquery/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/jquery-ui/jquery-ui.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/popper.js/popper.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/bootstrap/js/bootstrap.min.js')}}"></script>
     <!-- jquery slimscroll js -->
-    <script type="text/javascript" src="assetsAdmin/js/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/jquery-slimscroll/jquery.slimscroll.js')}}">
+    </script>
     <!-- modernizr js -->
-    <script type="text/javascript" src="assetsAdmin/js/modernizr/modernizr.js"></script>
-    <script type="text/javascript" src="assetsAdmin/js/modernizr/css-scrollbars.js"></script>
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/modernizr/modernizr.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/modernizr/css-scrollbars.js')}}"></script>
     <!-- classie js -->
-    <script type="text/javascript" src="assetsAdmin/js/classie/classie.js"></script>
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/classie/classie.js')}}"></script>
     <!-- Custom js -->
-    <script type="text/javascript" src="assetsAdmin/js/script.js"></script>
-    <script src="assetsAdmin/js/pcoded.min.js"></script>
-    <script src="assetsAdmin/js/demo-12.js"></script>
-    <script src="assetsAdmin/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/script.js')}}"></script>
+    <script src="{{asset('assets/assetsAdmin/js/pcoded.min.js')}}"></script>
+    <script src="{{asset('assets/assetsAdmin/js/demo-12.js')}}"></script>
+    <script src="{{asset('assets/assetsAdmin/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
 </body>
 
 </html>
