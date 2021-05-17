@@ -2,12 +2,18 @@
 @section('content')
 <div>
     @if ($message = Session::get('fail'))
-    <div class="alert alert-warning">
-        <p>{{ $message }}</p>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Failed!!</strong><span> {{ $message }}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     @elseif ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!!</strong><span> {{ $message }}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            &times;
+        </button>
     </div>
     @endif
 </div>
@@ -85,8 +91,7 @@
                     <div>
                         <a type="button" id="close" class="btn btn-primary btn-outline-primary"
                             onclick="hideForm()">Back</a>
-                        <button type="submit" class="btn btn-primary"
-                            onclick="$('#formAddCategoryService').hide();">Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
@@ -121,8 +126,6 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger"><i class="ti-trash"></i></button>
                                 </form>
-                                {{-- <button class="btn btn-inverse" data-toggle="tooltip" data-original-title="lihat detail"><i
-                                    class="ti-zoom-in"></i>Show</button> --}}
                             </td>
                         </tr>
                         @endforeach

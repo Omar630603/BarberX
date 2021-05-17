@@ -3,81 +3,74 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
+use App\Models\CategoryService;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view('admin.service');
+        $service = Service::with('categoryService')->get();
+        $categoryService = CategoryService::all();
+        return view('admin.service', compact('service', 'categoryService'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'category_service_id' => 'required',
+            'price' => 'required',
+            'image' => 'required',
+        ]);
+
+        if ($request->file('image')) {
+            $image = $request->file('image')->store('images', 'public');
+        }
+
+        $service = new Service;
+        $service->name = $request->get('name');
+        $service->price = $request->get('price');
+        $service->image = $image;
+
+        $categoryService = new CategoryService;
+        $categoryService->category_service_id = $request->get('category_service_id');
+
+        $service->categoryService()->associate($categoryService);
+        $service->save();
+
+
+        return redirect()->route('service.index')
+            ->with('success', 'Service Successfully Added');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show(Service $service)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(Service $service)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, Service $service)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy(Service $service)
     {
         //

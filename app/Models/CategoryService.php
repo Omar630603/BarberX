@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use  App\Models\Service;
 
 class CategoryService extends Model
 {
@@ -16,6 +17,12 @@ class CategoryService extends Model
         'name',
         'image',
     ];
+
+    public function service() {
+        return $this->hasMany(Service::class, 'category_service_id');
+    }
+
+
 
 
 }
