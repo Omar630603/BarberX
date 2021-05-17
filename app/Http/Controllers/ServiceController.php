@@ -107,8 +107,12 @@ class ServiceController extends Controller
     }
 
    
-    public function destroy(Service $service)
+    public function destroy($idservice)
     {
-        //
+        $service = Service::where('service_id',$idservice)->first();
+        Storage::delete('public/' . $service->image);
+        $service->delete();
+        return redirect()->route('service.index')
+            ->with('success', 'Service seccesfully Deleted');
     }
 }

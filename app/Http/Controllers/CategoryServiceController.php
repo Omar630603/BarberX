@@ -86,8 +86,10 @@ class CategoryServiceController extends Controller
     }
 
 
-    public function destroy(CategoryService $categoryService)
+    public function destroy($idcs)
     {
+        $categoryService = CategoryService::where('category_service_id',$idcs)->first();
+        Storage::delete('public/' . $categoryService->image);
         $categoryService->delete();
         return redirect()->route('categoryService.index')
             ->with('success', 'Category Service seccesfully Deleted');
