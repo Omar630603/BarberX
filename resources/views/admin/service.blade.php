@@ -80,7 +80,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="category_service_id" class="col-sm-3 col-form-label">Kategori</label>
+                        <label for="category_service_id" class="col-sm-3 col-form-label">Category Service</label>
                         <div class="col-sm-8">
                             <select name="category_service_id" id="category_service_id" class="form-control">
                                 @foreach($categoryService as $cs)

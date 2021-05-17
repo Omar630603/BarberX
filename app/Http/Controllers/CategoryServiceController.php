@@ -63,20 +63,22 @@ class CategoryServiceController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'image' => 'required',
+            'image' => 'nullable',
 
         ]);
 
         $categoryService = CategoryService::where('category_service_id', $idcs)
             ->first();
 
-        if ($categoryService->image && file_exists(storage_path('app/public/' . $categoryService->image))) {
-            Storage::delete('public/' . $categoryService->image);
+        if ($request->file('image')) {
+            if ($categoryService->image && file_exists(storage_path('app/public/' . $categoryService->image))) {
+                Storage::delete('public/' . $categoryService->image);
+                $image = $request->file('image')->store('images', 'public');
+                $categoryService->image = $image;
+            }
         }
 
-        $image = $request->file('image')->store('images', 'public');
         $categoryService->name = $request->get('name');
-        $categoryService->image = $image;
         $categoryService->save();
 
         return redirect()->route('categoryService.index')
