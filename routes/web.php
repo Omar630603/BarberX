@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryServiceController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -64,9 +65,6 @@ Route::get('/profile', function () {
 });
 
 // Employee Route
-Route::get('/employee', function () {
-    return view('admin.employee');
-});
-
+Route::resource('employee', EmployeeController::class);
 
 
