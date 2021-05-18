@@ -75,5 +75,5 @@ Route::get('/profile', function () {
 
 // Employee Route
 Route::get('/employee', function () {
-    return view('admin.employee');
+    return view('admin.employeeIndex');
 });
