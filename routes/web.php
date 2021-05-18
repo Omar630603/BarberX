@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryServiceController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -35,10 +36,11 @@ Route::get('/register', function () {
 });
 Route::get('/admin/index', function () {
     if (Auth::check()) {
-        return view('admin.adminIndex');
+        return view('admin.profile');
     }
     return redirect()->route('login');
 });
+Route::resource('/admins', UserController::class);
 // Sementara, nanti bisa diubah
 
 // Reservation Route

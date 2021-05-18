@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -12,9 +14,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->get('search');
+        if ($request->get('search')) {
+            $admins = User::search(['name', 'email'], $search)->get();
+        } else {
+            $admins = User::get();
+        }
+        return view('admin.adminIndex', compact('admins'));
     }
 
     /**
@@ -35,7 +43,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'image' => 'required',
+        ]);
+
+        if ($request->file('image')) {
+            $image = $request->file('image')->store('images', 'public');
+        }
+
+        $admin = new User;
+        $admin->name = $request->get('name');
+        $admin->email = $request->get('email');
+        $admin->password =  Hash::make($request->get('password'));
+        $admin->image = $image;
+        $admin->save();
+
+
+        return redirect()->route('admins.index')
+            ->with('success', 'New Admin Added Succesfully');
     }
 
     /**
@@ -55,9 +83,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $admin)
     {
-        //
+        return view('admin.adminEdit', ['admin' => $admin]);
     }
 
     /**
@@ -67,9 +95,28 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $admin)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'image' => 'required',
+
+        ]);
+        if ($request->file('image')) {
+            if ($admin->image) {
+                Storage::delete('public/' . $admin->image);
+                $image = $request->file('image')->store('images', 'public');
+                $admin->image = $image;
+            }
+        }
+
+        $admin->name = $request->get('name');
+        $admin->email = $request->get('email');
+        $admin->save();
+
+        return redirect()->route('admins.index')
+            ->with('success', 'Admin seccesfully Updated');
     }
 
     /**
@@ -78,8 +125,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $admin)
     {
-        //
+        Storage::delete('public/' . $admin->image);
+        $admin->delete();
+        return redirect()->route('admins.index')
+            ->with('success', 'Admin seccesfully Deleted');
     }
 }
