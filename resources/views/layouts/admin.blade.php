@@ -83,7 +83,7 @@
                         <a class="mobile-menu" id="mobile-collapse" href="#!">
                             <i class="ti-menu"></i>
                         </a>
-                        <a href="index.html">
+                        <a href="{{url('admin/index')}}">
                             <img class="img-fluid" width="130px" src="{{asset('assets/assetsAdmin/images/logo.png')}}"
                                 alt="Theme-Logo" />
                         </a>
@@ -115,7 +115,7 @@
                                 <a href="#!">
                                     <img src="{{asset('assets/assetsAdmin/images/avatar-4.jpg')}}" class="img-radius"
                                         alt="User-Profile-Image">
-                                    <span>John Doe</span>
+                                    <span>{{ Auth::user()->name }}</span>
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
@@ -125,9 +125,13 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{route('logout')}}">
+                                        <a href="{{route('logout')}}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                                             <i class="ti-layout-sidebar-left"></i> Logout
                                         </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                            @csrf
+                                        </form>
                                     </li>
                                 </ul>
                             </li>

@@ -26,6 +26,18 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Admin Route
+Route::get('/admin', function () {
+    return redirect()->route('login');
+});
+Route::get('/register', function () {
+    return redirect()->route('login');
+});
+Route::get('/admin/index', function () {
+    if (Auth::check()) {
+        return view('admin.adminIndex');
+    }
+    return redirect()->route('login');
+});
 // Sementara, nanti bisa diubah
 
 // Reservation Route
@@ -41,9 +53,6 @@ Route::resource('service', ServiceController::class);
 Route::resource('categoryService', CategoryServiceController::class);
 
 // User Route
-Route::get('/admin', function () {
-    return view('admin.adminIndex');
-});
 Route::get('/customer', function () {
     return view('admin.customerIndex');
 });
@@ -67,6 +76,3 @@ Route::get('/profile', function () {
 Route::get('/employee', function () {
     return view('admin.employee');
 });
-
-
-
