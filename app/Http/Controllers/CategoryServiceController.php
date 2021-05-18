@@ -9,9 +9,14 @@ use Illuminate\Support\Facades\Storage;
 class CategoryServiceController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $categoryService = CategoryService::get();
+        $search = $request->get('search');
+        if ($request->get('search')) {
+            $categoryService = CategoryService::search(['name'], $search)->get();
+        } else {
+            $categoryService = CategoryService::get();
+        }
         return view('admin.serviceCategoryIndex', compact('categoryService'));
     }
 
@@ -88,7 +93,7 @@ class CategoryServiceController extends Controller
 
     public function destroy($idcs)
     {
-        $categoryService = CategoryService::where('category_service_id',$idcs)->first();
+        $categoryService = CategoryService::where('category_service_id', $idcs)->first();
         Storage::delete('public/' . $categoryService->image);
         $categoryService->delete();
         return redirect()->route('categoryService.index')

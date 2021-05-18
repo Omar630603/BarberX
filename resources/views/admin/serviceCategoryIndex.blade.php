@@ -44,9 +44,10 @@
                 <div class="d-flex mx-3 mb-3" style="justify-content:space-between !important">
                     <div class="pcoded-search" id="search" style="width: 500px !important;">
                         <span class="searchbar-toggle"></span>
-                        <form action="">
+                        <form method="get" action="{{ route('categoryService.index') }}">
+                            @csrf
                             <div class="pcoded-search-box d-flex">
-                                <input type="text" class="mr-3" placeholder="Search">
+                                <input name="search" type="text" class="mr-3" placeholder="Search">
                                 <span>
                                     <button class="btn btn-info"><i class="ti-search"></i></button>
                                 </span>

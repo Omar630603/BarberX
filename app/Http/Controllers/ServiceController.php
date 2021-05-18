@@ -10,20 +10,26 @@ use Illuminate\Support\Facades\Storage;
 class ServiceController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $service = Service::with('categoryService')->get();
+        $search = $request->get('search');
+        if ($request->get('search')) {
+            $service = Service::with('categoryService')->search(['name', 'price'], $search)->get();
+            echo $service;
+        } else {
+            $service = Service::with('categoryService')->get();
+        }
         $categoryService = CategoryService::all();
         return view('admin.service', compact('service', 'categoryService'));
     }
 
-    
+
     public function create()
     {
         //
     }
 
-    
+
     public function store(Request $request)
     {
         $request->validate([
@@ -53,14 +59,12 @@ class ServiceController extends Controller
             ->with('success', 'Service Successfully Added');
     }
 
-    
+
     public function show(Service $service)
     {
-        
-
     }
 
-    
+
     public function edit($service_id)
     {
         $service = Service::where('service_id', $service_id)
@@ -69,7 +73,7 @@ class ServiceController extends Controller
         return view('admin.serviceEdit', ['service' => $service, 'categoryService' => $categoryService]);
     }
 
-    
+
     public function update(Request $request, $idservice)
     {
         $request->validate([
@@ -102,14 +106,12 @@ class ServiceController extends Controller
 
         return redirect()->route('service.index')
             ->with('success', 'Service Successfully Updated');
-
-
     }
 
-   
+
     public function destroy($idservice)
     {
-        $service = Service::where('service_id',$idservice)->first();
+        $service = Service::where('service_id', $idservice)->first();
         Storage::delete('public/' . $service->image);
         $service->delete();
         return redirect()->route('service.index')
