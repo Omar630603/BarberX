@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Service;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class ReservationController extends Controller
 {
@@ -66,11 +67,30 @@ class ReservationController extends Controller
         $reservation->service()->associate($service);
 
         $reservation->reservation_time = $request->get('reservation_time');
-        $reservation->reservation_code = "RBX" . "-" . $this->random_strings(8);
+        $reservation->reservation_code = $this->checkIfAva();
 
         $reservation->save();
         return redirect()->route('reservation.index')
             ->with('success', 'New Reservation Added Succesfully');
+    }
+    public function checkIfAva()
+    {
+        $reservations = Reservation::all();
+        $reservation_code = "RBX" . "-" . $this->random_strings(8);
+        $isAva = True;
+        for ($i = 0; $i < count($reservations); $i++) {
+            if ($reservations[$i]->reservation_code === $reservation_code) {
+                $isAva = False;
+            } else {
+                $isAva = True;
+            }
+        }
+        if ($isAva) {
+            return $reservation_code;
+        } else {
+            $this->checkIfAva();
+        }
+        return $reservation_code;
     }
     public function random_strings($length_of_string)
     {
