@@ -227,7 +227,7 @@
                                 <li class="pcoded">
                                     <a href="{{url('employee')}}">
                                         <span class=" pcoded-micon"><i class="ti-pin2"></i><b>D</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Barber</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Employee</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>

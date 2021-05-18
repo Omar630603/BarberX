@@ -4,82 +4,109 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    
+    public function index(Request $request)
     {
-        //
+        $search = $request->get('search');
+        if ($request->get('search')) {
+            $employee = Employee::search(['name', 'skill', 'description'], $search)->get();
+        } else {
+            $employee = Employee::get();
+        }
+        return view('admin.employeeIndex', compact('employee'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
-        //
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'skill' => 'required',
+            'description' => 'required',
+            'image' => 'required',
+        ]);
+
+        if ($request->file('image')) {
+            $image = $request->file('image')->store('images', 'public');
+        }
+
+        $employee = new Employee;
+        $employee->name = $request->get('name');
+        $employee->skill = $request->get('skill');
+        $employee->description = $request->get('description');
+        $employee->image = $image;
+
+        $employee->save();
+
+
+        return redirect()->route('employee.index')
+            ->with('success', 'Employee Successfully Added');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show(Employee $employee)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Employee $employee)
+   
+    public function edit($idemployee)
     {
-        //
+        $employee = Employee::where('employee_id', $idemployee)
+             ->first();
+        return view('admin.employeeEdit', ['employee' => $employee]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Employee $employee)
+   
+    public function update(Request $request, $idemployee)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'skill' => 'required',
+            'description' => 'required',
+            'image' => 'nullable',
+        ]);
+
+        $employee = Employee::where('employee_id', $idemployee)
+             ->first();
+
+        if ($request->file('image')) {
+            if ($employee->image && file_exists(storage_path('app/public/' . $employee->image))) {
+                Storage::delete('public/' . $employee->image);
+                $image = $request->file('image')->store('images', 'public');
+                $employee->image = $image;
+            }
+        }
+
+        $employee->name = $request->get('name');
+        $employee->skill = $request->get('skill');
+        $employee->description = $request->get('description');;
+
+        $employee->save();
+
+
+        return redirect()->route('employee.index')
+            ->with('success', 'Employee Successfully Updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Employee $employee)
+
+    public function destroy($idemployee)
     {
-        //
+        $employee = Employee::where('employee_id', $idemployee)
+                    ->first();
+        Storage::delete('public/' . $employee->image);
+        $employee->delete();
+        return redirect()->route('employee.index')
+            ->with('success', 'Employee seccesfully Deleted');
     }
 }
