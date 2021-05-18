@@ -56,20 +56,47 @@ class GalleryController extends Controller
     }
 
     
-    public function edit(Gallery $gallery)
+    public function edit($idgallery)
     {
-        //
+        $gallery = Gallery::where('gallery_id', $idgallery)
+            ->first();
+        $categoryService = CategoryService::all();
+        return view('admin.galleryEdit', ['gallery' => $gallery, 'categoryService' => $categoryService]);
     }
 
     
-    public function update(Request $request, Gallery $gallery)
+    public function update(Request $request, $idgallery)
     {
-        //
+        $request->validate([
+            'category_service_id' => 'required',
+            'image' => 'nullable',
+        ]);
+
+        $gallery = Gallery::where('gallery_id', $idgallery)
+            ->first();
+
+        if ($request->file('image')) {
+            if ($gallery->image && file_exists(storage_path('app/public/' . $gallery->image))) {
+                Storage::delete('public/' . $gallery->image);
+                $image = $request->file('image')->store('images', 'public');
+                $gallery->image = $image;
+            }
+        }
+
+        $categoryService = new CategoryService;
+        $categoryService->category_service_id = $request->get('category_service_id');
+
+        $gallery->categoryService()->associate($categoryService);
+        $gallery->save();
+
+
+        return redirect()->route('gallery.index')
+            ->with('success', 'Gallery Successfully Updated');
     }
 
     
     public function destroy(Gallery $gallery)
     {
-        //
+        
     }
 }
