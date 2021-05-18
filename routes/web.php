@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryServiceController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -55,9 +56,7 @@ Route::get('/message', function () {
 });
 
 // Gallery Route
-Route::get('/gallery', function () {
-    return view('admin.galleryIndex');
-});
+Route::resource('gallery', GalleryController::class);
 
 // Profile Route
 Route::get('/profile', function () {

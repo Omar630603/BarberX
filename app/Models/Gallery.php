@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use  App\Models\CategoryService;
 
 class Gallery extends Model
 {
@@ -15,4 +16,8 @@ class Gallery extends Model
         'category_service_id',
         'image',
     ];
+
+    public function categoryService() {
+        return $this->belongsTo(CategoryService::class, 'category_service_id');
+    }
 }
