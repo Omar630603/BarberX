@@ -60,15 +60,43 @@ class EmployeeController extends Controller
     }
 
    
-    public function edit(Employee $employee)
+    public function edit($idemployee)
     {
-        //
+        $employee = Employee::where('employee_id', $idemployee)
+             ->first();
+        return view('admin.employeeEdit', ['employee' => $employee]);
     }
 
    
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, $idemployee)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'skill' => 'required',
+            'description' => 'required',
+            'image' => 'nullable',
+        ]);
+
+        $employee = Employee::where('employee_id', $idemployee)
+             ->first();
+
+        if ($request->file('image')) {
+            if ($employee->image && file_exists(storage_path('app/public/' . $employee->image))) {
+                Storage::delete('public/' . $employee->image);
+                $image = $request->file('image')->store('images', 'public');
+                $employee->image = $image;
+            }
+        }
+
+        $employee->name = $request->get('name');
+        $employee->skill = $request->get('skill');
+        $employee->description = $request->get('description');;
+
+        $employee->save();
+
+
+        return redirect()->route('employee.index')
+            ->with('success', 'Employee Successfully Updated');
     }
 
 
