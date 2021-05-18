@@ -9,38 +9,38 @@ use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    
+
     public function index()
     {
         $msg = Message::all();
         return view('admin.messageIndex', compact('msg'));
     }
 
-   
+
     public function create()
     {
         //
     }
 
-    
+
     public function store(Request $request)
     {
         //
     }
 
-    
+
     public function show(Message $message)
     {
         //
     }
 
-    
+
     public function edit(Message $message)
     {
         //
     }
 
-   
+
     public function update(Request $request, $idm)
     {
         $request->validate([
@@ -55,8 +55,11 @@ class MessageController extends Controller
             ->with('success', 'Message Successfully Updated');
     }
 
-    public function destroy(Message $message)
+    public function destroy($idm)
     {
-        //
+        $msg = Message::where('message_id', $idm)->first();
+        $msg->delete();
+        return redirect()->route('message.index')
+            ->with('success', 'Message seccesfully Deleted');
     }
 }

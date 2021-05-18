@@ -67,7 +67,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Title</th>
-                            <th width = "50px !important">Message Text</th>
+                            <th width="50px !important">Message Text</th>
                             <th>Show</th>
                             <th>Action</th>
                         </tr>
@@ -81,17 +81,18 @@
                             <td>{{$m->email}}</td>
                             <td>{{$m->title}}</td>
                             <td> {{$m->messagetext}}</td>
-                            <td><div id = "message{{$m->message_id}}">   
+                            <td>
+                                <div id="message{{$m->message_id}}">
                                     @if($m->show)
-                                        Yes
-                                    @else 
-                                        No
-                                    
+                                    Yes
+                                    @else
+                                    No
+
                                     @endif
                                 </div>
-                                <div id = "editMessage{{$m->message_id}}" style = "display:none">
-                                    <form method="post"
-                                        action="{{ route('message.update', $m->message_id) }}"  style="display: flex">
+                                <div id="editMessage{{$m->message_id}}" style="display:none">
+                                    <form method="post" action="{{ route('message.update', $m->message_id) }}"
+                                        style="display: flex">
                                         @csrf
                                         @method('PUT')
                                         <select style="margin-top: 5px" name="show" class="form-control">
@@ -106,9 +107,9 @@
                             </td>
                             <td style="display: flex">
                                 <a type="button" class="btn btn-warning" href=""
-                            onclick="$('#editMessage{{$m->message_id}}').show(); $('#message{{$m->message_id}}').hide(); return false; "><i class="ti-marker-alt"></i></a>
-                                <form style="margin-left: 5px"
-                                    action="{{ route('message.destroy', $m->message_id) }}"
+                                    onclick="$('#editMessage{{$m->message_id}}').show(); $('#message{{$m->message_id}}').hide(); return false; "><i
+                                        class="ti-marker-alt"></i></a>
+                                <form style="margin-left: 5px" action="{{ route('message.destroy', $m->message_id) }}"
                                     method="POST">
                                     @csrf
                                     @method('DELETE')
