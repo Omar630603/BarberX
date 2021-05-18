@@ -95,8 +95,13 @@ class GalleryController extends Controller
     }
 
     
-    public function destroy(Gallery $gallery)
+    public function destroy($idgallery)
     {
-        
+        $gallery = Gallery::where('gallery_id', $idgallery)
+            ->first();
+        Storage::delete('public/' . $gallery->image);
+        $gallery->delete();
+        return redirect()->route('gallery.index')
+            ->with('success', 'Gallery seccesfully Deleted');
     }
 }
