@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryServiceController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -60,9 +61,7 @@ Route::get('/customer', function () {
 });
 
 // Message Route
-Route::get('/message', function () {
-    return view('admin.messageIndex');
-});
+Route::resource('message', MessageController::class);
 
 // Gallery Route
 Route::resource('gallery', GalleryController::class);

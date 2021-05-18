@@ -16,5 +16,6 @@ class Message extends Model
         'email',
         'title',
         'messagetext',
+        'show'
     ];
 }
