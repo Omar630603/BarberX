@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Service;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -12,9 +14,16 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->get('search');
+        if ($request->get('search')) {
+            $reservation = Reservation::with('customer', 'service')->search(['reservation_code', 'reservation_time'], $search)->get();
+        } else {
+            $reservation = Reservation::with('customer', 'service')->get();
+        }
+        $service = Service::all();
+        return view('admin.reservationIndex', compact('reservation', 'service'));
     }
 
     /**
@@ -35,9 +44,46 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+        ]);
+        $reservation = new Reservation;
+        $customer = new Customer;
+        if ($request->file('image')) {
+            $image = $request->file('image')->store('images', 'public');
+            $customer->image = $image;
+        }
+        $customer->name = $request->get('name');
+        $customer->email = $request->get('email');
+        $customer->phone = $request->get('phone');
+        $customer->save();
+        $reservation->customer()->associate($customer);
 
+        $service = new Service;
+        $service->service_id = $request->get('service_id');
+        $reservation->service()->associate($service);
+
+        $reservation->reservation_time = $request->get('reservation_time');
+        $reservation->reservation_code = "RBX" . "-" . $this->random_strings(8);
+
+        $reservation->save();
+        return redirect()->route('reservation.index')
+            ->with('success', 'New Reservation Added Succesfully');
+    }
+    public function random_strings($length_of_string)
+    {
+        // String of all alphanumeric character
+        $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        // Shufle the $str_result and returns substring
+        // of specified length
+        return substr(
+            str_shuffle($str_result),
+            0,
+            $length_of_string
+        );
+    }
     /**
      * Display the specified resource.
      *

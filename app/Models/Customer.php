@@ -18,4 +18,8 @@ class Customer extends Model
         'phone',
         'image',
     ];
+    public function reservation()
+    {
+        return $this->hasMany(Reservation::class, 'customer_id');
+    }
 }
