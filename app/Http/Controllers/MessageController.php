@@ -10,9 +10,14 @@ use Illuminate\Http\Request;
 class MessageController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $msg = Message::all();
+        $search = $request->get('search');
+        if ($request->get('search')) {
+            $msg = Message::search(['name', 'email', 'title', 'messagetext'], $search)->get();
+        } else {
+            $msg = Message::all();
+        }
         return view('admin.messageIndex', compact('msg'));
     }
 
