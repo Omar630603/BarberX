@@ -100,8 +100,13 @@ class EmployeeController extends Controller
     }
 
 
-    public function destroy(Employee $employee)
+    public function destroy($idemployee)
     {
-        //
+        $employee = Employee::where('employee_id', $idemployee)
+                    ->first();
+        Storage::delete('public/' . $employee->image);
+        $employee->delete();
+        return redirect()->route('employee.index')
+            ->with('success', 'Employee seccesfully Deleted');
     }
 }
