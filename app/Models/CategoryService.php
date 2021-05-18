@@ -22,6 +22,9 @@ class CategoryService extends Model
         return $this->hasMany(Service::class, 'category_service_id');
     }
 
+    public function gallery() {
+        return $this->hasMany(Gallery::class, 'category_service_id');
+    }
 
 
 
