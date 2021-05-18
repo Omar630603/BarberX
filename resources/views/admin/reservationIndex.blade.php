@@ -103,11 +103,13 @@
                     <div class="form-group row">
                         <label for="service_id" class="col-sm-3 col-form-label">Service</label>
                         <div class="col-sm-8">
-                            <select name="service_id" id="category_service_id" class="form-control">
+                            <div class="form-control">
                                 @foreach($service as $s)
-                                <option value="{{$s->service_id}}">{{$s->name}}</option>
+                                <input type="checkbox" id="service{{$s->service_id}}" name="service_id[]"
+                                    value="{{$s->service_id}}">
+                                <label for="service{{$s->service_id}}">{{$s->name}}</label>
                                 @endforeach
-                            </select>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">

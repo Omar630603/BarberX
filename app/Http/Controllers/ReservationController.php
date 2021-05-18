@@ -45,33 +45,41 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-        ]);
-        $reservation = new Reservation;
-        $customer = new Customer;
-        if ($request->file('image')) {
-            $image = $request->file('image')->store('images', 'public');
-            $customer->image = $image;
+        $service_id = $request->get('service_id');
+        if (empty($service_id)) {
+            return redirect()->route('reservation.index')
+                ->with('fail', 'Cheack the service');
+        } else {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'phone' => 'required',
+            ]);
+            $reservation_code = $this->checkIfAva();
+            $customer = new Customer;
+            if ($request->file('image')) {
+                $image = $request->file('image')->store('images', 'public');
+                $customer->image = $image;
+            }
+            $customer->name = $request->get('name');
+            $customer->email = $request->get('email');
+            $customer->phone = $request->get('phone');
+            $customer->save();
+            for ($i = 0; $i < count($service_id); $i++) {
+                $reservation = new Reservation;
+                $reservation->customer()->associate($customer);
+                $service = new Service;
+                $service->service_id = $service_id[$i];
+                $reservation->service()->associate($service);
+
+                $reservation->reservation_time = $request->get('reservation_time');
+                $reservation->reservation_code = $reservation_code;
+
+                $reservation->save();
+            }
+            return redirect()->route('reservation.index')
+                ->with('success', 'New Reservation Added Succesfully');
         }
-        $customer->name = $request->get('name');
-        $customer->email = $request->get('email');
-        $customer->phone = $request->get('phone');
-        $customer->save();
-        $reservation->customer()->associate($customer);
-
-        $service = new Service;
-        $service->service_id = $request->get('service_id');
-        $reservation->service()->associate($service);
-
-        $reservation->reservation_time = $request->get('reservation_time');
-        $reservation->reservation_code = $this->checkIfAva();
-
-        $reservation->save();
-        return redirect()->route('reservation.index')
-            ->with('success', 'New Reservation Added Succesfully');
     }
     public function checkIfAva()
     {
