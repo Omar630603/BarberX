@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryServiceController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Auth;
@@ -37,10 +39,11 @@ Route::get('/register', function () {
 });
 Route::get('/admin/index', function () {
     if (Auth::check()) {
-        return view('admin.adminIndex');
+        return view('admin.profile');
     }
     return redirect()->route('login');
 });
+Route::resource('/admins', UserController::class);
 // Sementara, nanti bisa diubah
 
 // Reservation Route
@@ -55,10 +58,8 @@ Route::get('/reservationStatus', function () {
 Route::resource('service', ServiceController::class);
 Route::resource('categoryService', CategoryServiceController::class);
 
-// User Route
-Route::get('/customer', function () {
-    return view('admin.customerIndex');
-});
+// Customer Route
+Route::resource('/customer', CustomerController::class);
 
 // Message Route
 Route::resource('message', MessageController::class);

@@ -113,7 +113,8 @@
                         <ul class="nav-right">
                             <li class="user-profile header-notification">
                                 <a href="#!">
-                                    <img src="{{asset('assets/assetsAdmin/images/avatar-4.jpg')}}" class="img-radius"
+                                    <img width="40px" height="40px" style="border-radius: 15%"
+                                        src="{{asset('storage/'.Auth::user()->image) }}" class="img-radius"
                                         alt="User-Profile-Image">
                                     <span>{{ Auth::user()->name }}</span>
                                     <i class="ti-angle-down"></i>
@@ -207,7 +208,7 @@
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
-                                            <a href="{{url('admin')}}">
+                                            <a href="{{route('admins.index')}}">
                                                 <span class=" pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext"
                                                     data-i18n="nav.basic-components.alert">Admin</span>
@@ -215,7 +216,7 @@
                                             </a>
                                         </li>
                                         <li class=" ">
-                                            <a href="{{url('customer')}}">
+                                            <a href="{{route('customer.index')}}">
                                                 <span class=" pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext"
                                                     data-i18n="nav.basic-components.breadcrumbs">Customer</span>

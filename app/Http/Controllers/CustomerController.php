@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
@@ -12,9 +13,15 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->get('search');
+        if ($request->get('search')) {
+            $customers = Customer::search(['name', 'email', 'phone'], $search)->get();
+        } else {
+            $customers = Customer::get();
+        }
+        return view('admin.customerIndex', compact('customers'));
     }
 
     /**
@@ -35,7 +42,23 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+        ]);
+        $customer = new Customer;
+        if ($request->file('image')) {
+            $image = $request->file('image')->store('images', 'public');
+            $customer->image = $image;
+        }
+        $customer->name = $request->get('name');
+        $customer->email = $request->get('email');
+        $customer->phone = $request->get('phone');
+        $customer->save();
+
+        return redirect()->route('customer.index')
+            ->with('success', 'New Customer Added Succesfully');
     }
 
     /**
@@ -57,7 +80,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('admin.customerEdit', ['customer' => $customer]);
     }
 
     /**
@@ -69,7 +92,28 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'image' => 'nullable',
+
+        ]);
+        if ($request->file('image')) {
+            if ($customer->image) {
+                Storage::delete('public/' . $customer->image);
+            }
+            $image = $request->file('image')->store('images', 'public');
+            $customer->image = $image;
+        }
+
+        $customer->name = $request->get('name');
+        $customer->phone = $request->get('phone');
+        $customer->email = $request->get('email');
+        $customer->save();
+
+        return redirect()->route('customer.index')
+            ->with('success', 'Customer seccesfully Updated');
     }
 
     /**
@@ -80,6 +124,9 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        Storage::delete('public/' . $customer->image);
+        $customer->delete();
+        return redirect()->route('customer.index')
+            ->with('success', 'Customer seccesfully Deleted');
     }
 }
