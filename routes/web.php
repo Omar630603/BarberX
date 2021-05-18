@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
@@ -52,9 +52,6 @@ Route::get('/customer', function () {
 Route::get('/message', function () {
     return view('admin.messageIndex');
 });
-Route::get('/selectedMessage', function () {
-    return view('admin.selectedMessageIndex');
-});
 
 // Gallery Route
 Route::get('/gallery', function () {
@@ -65,3 +62,11 @@ Route::get('/gallery', function () {
 Route::get('/profile', function () {
     return view('admin.profile');
 });
+
+// Employee Route
+Route::get('/employee', function () {
+    return view('admin.employee');
+});
+
+
+

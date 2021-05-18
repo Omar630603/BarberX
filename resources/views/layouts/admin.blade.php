@@ -220,35 +220,24 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)">
-                                        <span class="pcoded-micon"><i class="ti-comment"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Message</span>
+                                <li class="pcoded">
+                                    <a href="{{url('employee')}}">
+                                        <span class=" pcoded-micon"><i class="ti-pin2"></i><b>D</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Barber</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                    <ul class="pcoded-submenu">
-                                        <li class=" ">
-                                            <a href="{{url('message')}}">
-                                                <span class=" pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">All
-                                                    Message</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="{{url('selectedMessage')}}">
-                                                <span class=" pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext"
-                                                    data-i18n="nav.basic-components.breadcrumbs">Selected Message</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
                                 <li class="pcoded">
                                     <a href="{{url('gallery')}}">
                                         <span class=" pcoded-micon"><i class="ti-gallery"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Gallery</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li class="pcoded">
+                                    <a href="{{url('message')}}">
+                                        <span class=" pcoded-micon"><i class="ti-comment"></i><b>D</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Message</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
