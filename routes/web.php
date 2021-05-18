@@ -74,6 +74,4 @@ Route::get('/profile', function () {
 });
 
 // Employee Route
-Route::get('/employee', function () {
-    return view('admin.employeeIndex');
-});
+Route::resource('employee', EmployeeController::class);
