@@ -15,7 +15,6 @@ class ServiceController extends Controller
         $search = $request->get('search');
         if ($request->get('search')) {
             $service = Service::with('categoryService')->search(['name', 'price'], $search)->get();
-            echo $service;
         } else {
             $service = Service::with('categoryService')->get();
         }
