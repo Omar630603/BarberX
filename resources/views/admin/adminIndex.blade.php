@@ -91,7 +91,7 @@
                     <div class="form-group row">
                         <label for="password" class="col-sm-3 col-form-label">Password</label>
                         <div class="col-sm-8">
-                            <input type="password" class="form-control" id="password" placeholder="Enter E-mail"
+                            <input type="password" class="form-control" id="password" placeholder="Enter Password"
                                 name="password">
                         </div>
                     </div>

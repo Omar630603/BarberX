@@ -216,7 +216,7 @@
                                             </a>
                                         </li>
                                         <li class=" ">
-                                            <a href="{{url('customer')}}">
+                                            <a href="{{route('customer.index')}}">
                                                 <span class=" pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext"
                                                     data-i18n="nav.basic-components.breadcrumbs">Customer</span>

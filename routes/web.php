@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryServiceController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\UserController;
@@ -56,10 +57,8 @@ Route::get('/reservationStatus', function () {
 Route::resource('service', ServiceController::class);
 Route::resource('categoryService', CategoryServiceController::class);
 
-// User Route
-Route::get('/customer', function () {
-    return view('admin.customerIndex');
-});
+// Customer Route
+Route::resource('/customer', CustomerController::class);
 
 // Message Route
 Route::get('/message', function () {

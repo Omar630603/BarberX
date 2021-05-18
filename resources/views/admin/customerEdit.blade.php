@@ -6,7 +6,7 @@
             <div class="page-header-title">
                 <i class="ti-marker-alt bg-c-yellow"></i>
                 <div class="d-inline">
-                    <h4 class="mt-3">Edit Admin</h4>
+                    <h4 class="mt-3">Edit Customer</h4>
                 </div>
             </div>
         </div>
@@ -35,28 +35,33 @@
             </div>
             @endif
             <div>
-                <form method="post" action="{{ route('admins.update', $admin->user_id) }}" id="myForm"
+                <form method="post" action="{{ route('customer.update', $customer->customer_id) }}" id="myForm"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label for="name">Admin Name</label>
-                        <input type="text" class="form-control" id="name" value="{{$admin->name}}"
-                            placeholder="{{$admin->name}}" name="name">
+                        <label for="name">Customer Name</label>
+                        <input type="text" class="form-control" id="name" value="{{$customer->name}}"
+                            placeholder="{{$customer->name}}" name="name">
                     </div>
                     <div class="form-group">
                         <label for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" value="{{$admin->email}}"
-                            placeholder="{{$admin->email}}" name="email">
+                        <input type="email" class="form-control" id="email" value="{{$customer->email}}"
+                            placeholder="{{$customer->email}}" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">E-mail</label>
+                        <input type="text" class="form-control" id="phone" value="{{$customer->phone}}"
+                            placeholder="{{$customer->phone}}" name="phone">
                     </div>
                     <div class="form-group">
                         <label for="image">Photo</label>
-                        <input type="file" name="image" class="form-control" id="foto_unit" value="{{$admin->image}}"
+                        <input type="file" name="image" class="form-control" id="foto_unit" value="{{$customer->image}}"
                             aria-describedby="image">
-                        <img width="100px" height="100px" class="mt-2" src="{{asset('storage/'.$admin->image) }}">
+                        <img width="100px" height="100px" class="mt-2" src="{{asset('storage/'.$customer->image) }}">
                     </div>
                     <a type="button" class="btn btn-primary btn-outline-primary"
-                        href="{{route('admins.index')}}">back</a>
+                        href="{{route('customer.index')}}">back</a>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

@@ -47,18 +47,16 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'image' => 'required',
         ]);
-
+        $admin = new User;
         if ($request->file('image')) {
             $image = $request->file('image')->store('images', 'public');
+            $admin->image = $image;
         }
 
-        $admin = new User;
         $admin->name = $request->get('name');
         $admin->email = $request->get('email');
         $admin->password =  Hash::make($request->get('password'));
-        $admin->image = $image;
         $admin->save();
 
 
@@ -100,15 +98,15 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'image' => 'required',
+            'image' => 'nullable',
 
         ]);
         if ($request->file('image')) {
             if ($admin->image) {
                 Storage::delete('public/' . $admin->image);
-                $image = $request->file('image')->store('images', 'public');
-                $admin->image = $image;
             }
+            $image = $request->file('image')->store('images', 'public');
+            $admin->image = $image;
         }
 
         $admin->name = $request->get('name');
