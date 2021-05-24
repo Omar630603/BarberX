@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Service;
 use App\Models\Reservation;
+use App\Models\ReservationStatus;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\PseudoTypes\True_;
 
@@ -65,6 +66,7 @@ class ReservationController extends Controller
             $customer->email = $request->get('email');
             $customer->phone = $request->get('phone');
             $customer->save();
+            $total = 0;
             for ($i = 0; $i < count($service_id); $i++) {
                 $reservation = new Reservation;
                 $reservation->customer()->associate($customer);
@@ -74,9 +76,18 @@ class ReservationController extends Controller
 
                 $reservation->reservation_time = $request->get('reservation_time');
                 $reservation->reservation_code = $reservation_code;
-
+                $svcprice = Service::where('service_id', $service_id[$i])->first();
+                $total += $svcprice->price;
                 $reservation->save();
             }
+
+            $reservationStatus = New ReservationStatus;
+            $reservationStatus->reservation_code = $reservation_code;
+            $reservationStatus->price = $total;
+            $reservationStatus->status= 0;
+            $reservationStatus->save();
+
+
             return redirect()->route('reservation.index')
                 ->with('success', 'New Reservation Added Succesfully');
         }

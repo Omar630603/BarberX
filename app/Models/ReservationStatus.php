@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Reservation;
 
 class ReservationStatus extends Model
 {
@@ -16,4 +17,16 @@ class ReservationStatus extends Model
         'status',
         'price',
     ];
+
+    public function reservation()
+    {
+        return $this->belongsTo(Reservation::class, 'reservation_code');
+    }
+
+   
+
+
+
+
+
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Service;
 use App\Models\Customer;
+use App\Models\ReservationStatus;
 
 class Reservation extends Model
 {
@@ -29,4 +30,10 @@ class Reservation extends Model
     protected $casts = [
         'reservation_time' => 'datetime',
     ];
+
+     public function reservationStatus()
+    {
+        return $this->hasOne(ReservationStatus::class, 'reservation_code');
+    }
+
 }
