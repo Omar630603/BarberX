@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ReservationStatus;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class ReservationStatusController extends Controller
@@ -59,8 +60,14 @@ class ReservationStatusController extends Controller
     }
 
     
-    public function destroy(ReservationStatus $reservationStatus)
+    public function destroy($idrStatus)
     {
-        //
+        $code = ReservationStatus::where('reservation_status_id', $idrStatus)->value('reservation_code');
+        $reservations = Reservation::where('reservation_code', $code)->get();
+        foreach ($reservations as $r) {
+                $r->delete();
+            }
+        return redirect()->route('reservationStatus.index')
+            ->with('success', 'Reservation Status seccesfully Deleted');
     }
 }
