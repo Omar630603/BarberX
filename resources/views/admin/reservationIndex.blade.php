@@ -136,7 +136,6 @@
                             <th>#</th>
                             <th>Reservation Code</th>
                             <th>Customer</th>
-                            <th>Service</th>
                             <th>Reservation Time</th>
                             <th>Action</th>
                         </tr>
@@ -148,20 +147,91 @@
                             <th scope="row">{{$no++}}</th>
                             <td>{{$r->reservation_code}}</td>
                             <td>{{$r->customer->name}}</td>
-                            <td>{{$r->service->name}}</td>
                             <td>{{$r->reservation_time}}</td>
-                            <td style="display: flex">
+                            <td style="display: flex; justify-content: space-between">
                                 <a type="button" class="btn btn-warning"
                                     href="{{ route('reservation.edit', $r->reservation_id) }}"><i
                                         class="ti-marker-alt"></i></a>
-                                <form style="margin-left: 5px"
+                                <form style="display: none" id="deleteReservation{{$r->reservation_id}}"
                                     action="{{ route('reservation.destroy', $r->reservation_id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger"><i class="ti-trash"></i></button>
                                 </form>
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="document.getElementById('deleteReservation{{$r->reservation_id}}').submit();"><i
+                                        class="ti-trash"></i></button>
+                                <button class="btn btn-inverse" data-toggle="modal"
+                                    data-target="#reservation{{$r->reservation_id}}" data-toggle="tooltip"
+                                    data-original-title="see detail"><i class="
+                                    ti-zoom-in"></i>Show</button>
                             </td>
                         </tr>
+                        <div class="modal fade" id="reservation{{$r->reservation_id}}" tabindex="-1" role="dialog"
+                            aria-labelledby="reservation{{$r->reservation_id}}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Detail
+                                            {{$r->customer->name}}'s Reservation</h5>
+                                        <button style="border-radius:5px" class="btn btn-sm btn-info">Print PDF</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div
+                                            style="border:2px solid rgba(0,0,0,.125); padding: 10px; border-radius: 10px; margin-bottom: 15px">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Customer</h5>
+                                            <div style="display: flex; justify-content: space-between">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">Name :{{$r->customer->name}}</li>
+                                                    <li class="list-group-item">E-Mail :{{$r->customer->email}}</li>
+                                                    <li class="list-group-item">Phone :{{$r->customer->phone}}</li>
+                                                    <li class="list-group-item">Reservation Time
+                                                        :{{$r->reservation_time}}</li>
+                                                </ul>
+                                                <img class="float-right my-2" width="170px" height="170px"
+                                                    style="border-radius: 10%"
+                                                    src="{{asset('storage/'.$r->customer->image)}}">
+                                            </div>
+                                        </div>
+                                        <div
+                                            style="border:2px solid rgba(0,0,0,.125); padding: 10px; border-radius: 10px; margin-bottom: 15px">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Services</h5>
+                                            <div>
+                                                <ul class="list-group list-group-flush">
+                                                    @foreach ($reservationServices as $rS)
+                                                    @if ($r->reservation_code == $rS->reservation_code)
+                                                    <li style="display: flex; justify-content: space-between"
+                                                        class="list-group-item">
+                                                        Service: {{$rS->service->name}}<br>
+                                                        Price: {{$rS->service->price}}
+                                                        <img width="50px" height="50px" style="border-radius: 10%"
+                                                            src="{{asset('storage/'.$r->service->image)}}"></li>
+                                                    @endif
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div
+                                            style="border:2px solid rgba(0,0,0,.125); padding: 10px; border-radius: 10px">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Reservation Status</h5>
+                                            <div>
+                                                <ul class="list-group list-group-flush">
+                                                    @foreach ($reservationStatus as $rStatus)
+                                                    @if ($r->reservation_code == $rStatus->reservation_code)
+                                                    <li class="list-group-item">Total: {{$rStatus->price}}</li>
+                                                    @if ($rStatus->status)
+                                                    <li class="list-group-item">Status: Done</li>
+                                                    @else
+                                                    <li class="list-group-item">Status: Waiting Customer</li>
+                                                    @endif
+                                                    @endif
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         @endforeach
                     </tbody>
                 </table>

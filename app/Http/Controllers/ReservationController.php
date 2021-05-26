@@ -7,7 +7,6 @@ use App\Models\Service;
 use App\Models\Reservation;
 use App\Models\ReservationStatus;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class ReservationController extends Controller
 {
@@ -20,12 +19,14 @@ class ReservationController extends Controller
     {
         $search = $request->get('search');
         if ($request->get('search')) {
-            $reservation = Reservation::with('customer', 'service')->search(['reservation_code', 'reservation_time'], $search)->get();
+            $reservation = Reservation::with('customer', 'service')->search(['reservation_code', 'reservation_time'], $search)->orderBy('reservation_time', 'desc')->groupBy('reservation_code')->get();
         } else {
-            $reservation = Reservation::with('customer', 'service')->get();
+            $reservation = Reservation::with('customer', 'service')->groupBy('reservation_code')->orderBy('reservation_time', 'desc')->get();
         }
+        $reservationStatus = ReservationStatus::all();
+        $reservationServices = Reservation::with('service')->get();
         $service = Service::all();
-        return view('admin.reservationIndex', compact('reservation', 'service'));
+        return view('admin.reservationIndex', compact('reservation', 'service', 'reservationServices', 'reservationStatus'));
     }
 
     /**
@@ -81,10 +82,10 @@ class ReservationController extends Controller
                 $reservation->save();
             }
 
-            $reservationStatus = New ReservationStatus;
+            $reservationStatus = new ReservationStatus;
             $reservationStatus->reservation_code = $reservation_code;
             $reservationStatus->price = $total;
-            $reservationStatus->status= 0;
+            $reservationStatus->status = 0;
             $reservationStatus->save();
 
 
@@ -165,7 +166,10 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        $reservation->delete();
+        $reservations = Reservation::where('reservation_code', $reservation->reservation_code)->get();
+        foreach ($reservations as $r) {
+            $r->delete();
+        }
         return redirect()->route('reservation.index')
             ->with('success', 'Reservation seccesfully Deleted');
     }
