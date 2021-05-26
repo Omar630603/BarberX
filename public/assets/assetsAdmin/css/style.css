@@ -23721,3 +23721,25 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.long-text {
+    overflow: hidden;
+    width: 150px;
+    word-wrap: break-word;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+}
+
+.long-title {
+    overflow: hidden;
+    width: 100px;
+    word-wrap: break-word;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+}

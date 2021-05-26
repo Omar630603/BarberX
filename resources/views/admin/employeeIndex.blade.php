@@ -3,17 +3,13 @@
 <div>
     @if ($message = Session::get('fail'))
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Failed!!</strong><span> {{ $message }}</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
     </div>
     @elseif ($message = Session::get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Success!!</strong><span> {{ $message }}</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            &times;
-        </button>
     </div>
     @endif
 </div>
@@ -82,14 +78,15 @@
                 <div class="form-group row">
                     <label for="skill" class="col-sm-3 col-form-label">Skill</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="skill" placeholder="Enter Employee Skill" name="skill">
+                        <input type="text" class="form-control" id="skill" placeholder="Enter Employee Skill"
+                            name="skill">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Description</label>
                     <div class="col-sm-8">
-                        <textarea rows="5" cols="5" class="form-control"
-                        placeholder="Default textarea" name="description" id="description"></textarea>
+                        <textarea rows="5" cols="5" class="form-control" placeholder="Default textarea"
+                            name="description" id="description"></textarea>
                     </div>
                 </div>
                 <div class="form-group row">

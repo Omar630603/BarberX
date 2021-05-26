@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ReservationStatusController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -48,13 +49,8 @@ Route::resource('/admins', UserController::class);
 // Sementara, nanti bisa diubah
 
 // Reservation Route
-Route::get('/reservation', function () {
-    return view('admin.reservationIndex');
-});
 Route::resource('reservation', ReservationController::class);
-Route::get('/reservationStatus', function () {
-    return view('admin.reservationStatusIndex');
-});
+Route::resource('reservationStatus', ReservationStatusController::class);
 
 // Service Route
 Route::resource('service', ServiceController::class);

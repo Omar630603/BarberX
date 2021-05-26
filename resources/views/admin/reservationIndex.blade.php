@@ -3,17 +3,13 @@
 <div>
     @if ($message = Session::get('fail'))
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Failed!!</strong><span> {{ $message }}</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
     </div>
     @elseif ($message = Session::get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Success!!</strong><span> {{ $message }}</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            &times;
-        </button>
     </div>
     @endif
 </div>
@@ -145,7 +141,7 @@
                         @foreach($reservation as $r)
                         <tr>
                             <th scope="row">{{$no++}}</th>
-                            <td>{{$r->reservation_code}}</td>
+                            <td><b>{{$r->reservation_code}}</b></td>
                             <td>{{$r->customer->name}}</td>
                             <td>{{$r->reservation_time}}</td>
                             <td style="display: flex; justify-content: space-between">
@@ -171,9 +167,13 @@
                             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Detail
-                                            {{$r->customer->name}}'s Reservation</h5>
-                                        <button style="border-radius:5px" class="btn btn-sm btn-info">Print PDF</button>
+                                        <div>
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Detail
+                                                {{$r->customer->name}}'s Reservation</h5>
+                                            <h6 class="mt-3">Code Reservation: <b>{{$r->reservation_code}}</b></h6>
+                                        </div>
+                                        <button style="border-radius:5px" class="btn btn-sm btn-success">Print
+                                            PDF</button>
                                     </div>
                                     <div class="modal-body">
                                         <div

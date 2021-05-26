@@ -3,17 +3,13 @@
 <div>
     @if ($message = Session::get('fail'))
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Failed!!</strong><span> {{ $message }}</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
     </div>
     @elseif ($message = Session::get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Success!!</strong><span> {{ $message }}</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            &times;
-        </button>
     </div>
     @endif
 </div>
@@ -79,8 +75,12 @@
                             <th scope="row">{{$no++}}</th>
                             <td>{{$m->name}}</td>
                             <td>{{$m->email}}</td>
-                            <td>{{$m->title}}</td>
-                            <td> {{$m->messagetext}}</td>
+                            <td>
+                                <p class="long-title">{{$m->title}}</p>
+                            </td>
+                            <td>
+                                <p class="long-text">{{$m->messagetext}}</p>
+                            </td>
                             <td>
                                 <div id="message{{$m->message_id}}">
                                     @if($m->show)
@@ -100,7 +100,8 @@
                                             <option value="1">Yes</option>
                                         </select>
                                         <div style="margin-top: 5px; margin-left: 10px">
-                                            <button type="submit" class="btn btn-primary">Done</button>
+                                            <button type="submit" class="btn btn-sm btn-primary"><i
+                                                    class="ti-check"></i></button>
                                         </div>
                                     </form>
                                 </div>

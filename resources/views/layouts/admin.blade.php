@@ -161,7 +161,7 @@
                                             <a href="{{route('reservation.index')}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext"
-                                                    data-i18n="nav.basic-components.alert">All</span>
+                                                    data-i18n="nav.basic-components.alert">Reservation</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -169,7 +169,8 @@
                                             <a href="{{url('reservationStatus')}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext"
-                                                    data-i18n="nav.basic-components.breadcrumbs">Done</span>
+                                                    data-i18n="nav.basic-components.breadcrumbs">Reservation
+                                                    Status</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
