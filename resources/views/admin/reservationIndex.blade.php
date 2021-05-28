@@ -172,8 +172,10 @@
                                                 {{$r->customer->name}}'s Reservation</h5>
                                             <h6 class="mt-3">Code Reservation: <b>{{$r->reservation_code}}</b></h6>
                                         </div>
-                                        <button style="border-radius:5px" class="btn btn-sm btn-success">Print
-                                            PDF</button>
+                                        <a style="border-radius:5px" class="btn btn-sm btn-success"
+                                            href="{{route('printReservationPDF', $r)}}" target="_blank"
+                                            rel="noopener noreferrer">Print
+                                            PDF</a>
                                     </div>
                                     <div class="modal-body">
                                         <div
