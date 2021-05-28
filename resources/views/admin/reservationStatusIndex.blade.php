@@ -47,8 +47,11 @@
                                 <button class="btn btn-info"><i class="ti-search"></i></button>
                             </span>
                         </div>
+
                     </form>
                 </div>
+                <a type="button" class="btn btn-primary ml-3" href="{{route('reservationStatus.print_pdf')}}"><i
+                        class="ti-download"></i>Export To PDF</a>
             </div>
         </div>
 

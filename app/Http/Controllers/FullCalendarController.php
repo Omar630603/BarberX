@@ -14,8 +14,8 @@ class FullCalendarController extends Controller
 
         $date = $request->tanggal;
         if($date){
-        $reservation = Reservation::with('reservationStatus')->search(['reservation_time'], $date)->get();
-        $selectDate = $date;
+            $reservation = Reservation::with('reservationStatus')->search(['reservation_time'], $date)->get();
+            $selectDate = $date;
         }
         else{
 

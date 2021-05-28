@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ReservationStatus;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use PDF;
 
 class ReservationStatusController extends Controller
 {
@@ -69,5 +70,14 @@ class ReservationStatusController extends Controller
             }
         return redirect()->route('reservationStatus.index')
             ->with('success', 'Reservation Status seccesfully Deleted');
+    }
+
+    public function print_pdf(){
+        $reservationStatus = ReservationStatus::with('reservation')->get();
+        // dd($reservationStatus);
+        $pdf = PDF::loadview('admin.print_pdf', ['reservationStatus'=>$reservationStatus]);
+        return $pdf->stream();
+
+        
     }
 }
