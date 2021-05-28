@@ -52,7 +52,7 @@ Route::resource('/admins', UserController::class);
 // Reservation Route
 Route::resource('reservation', ReservationController::class);
 Route::resource('reservationStatus', ReservationStatusController::class);
-Route::get('/reservationStatus/print_pdf/{reservationStatus}', [ReservationStatusController::class, 'print_pdf'])->name('reservationStatus.print_pdf');
+
 
 
 // Service Route
@@ -79,5 +79,6 @@ Route::resource('employee', EmployeeController::class);
 // Calendar Route
 Route::get('/calendar', [FullCalendarController::class, 'index'])->name('calendar.index');
 
-// Calendar Route
+// print pdf route Route
 Route::get('/reservation/printPdf/{reservation}', [ReservationController::class, 'printReservationPDF'])->name('printReservationPDF');
+Route::get('/reservationStatus/printPdf', [ReservationStatusController::class, 'print_pdf'])->name('print_pdf');

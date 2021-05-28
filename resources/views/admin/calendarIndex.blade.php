@@ -12,9 +12,9 @@
             </div>
             <div class="penyewaanContainer"
                 style="border-left: 1px solid rgb(221, 221, 221); width : 50%; padding: 10px">
+                <h5><b style="color: #00aced"> Reservation In {{$selectDate}} </b>
+                </h5>
                 <div class="table-responsive">
-                    <h5><b style="color: #00aced"> Reservation In {{$selectDate}} </b>
-                    </h5>
                     <table class="table table-hover" style="margin-top: 10px;">
                         <thead>
                             <tr>
@@ -34,9 +34,18 @@
                                 @if ($s->reservation_code == $rStatus->reservation_code)
                                 <td>Total: {{$rStatus->price}}</td>
                                 @if ($rStatus->status)
-                                <td>Done</td>
+                                <td>
+                                    <div
+                                        style="background: rgb(74, 212, 132); color: white; padding: 7px; font-size: 12px;">
+                                        Done </div>
+                                </td>
                                 @else
-                                <td>Waiting Customer</td>
+                                <td>
+                                    <div
+                                        style="background: rgb(214, 84, 84); color: white; padding: 7px; font-size: 12px;">
+                                        Waiting
+                                        Customer </div></i>
+                                </td>
                                 @endif
                                 @endif
                                 @endforeach

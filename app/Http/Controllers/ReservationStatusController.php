@@ -74,7 +74,6 @@ class ReservationStatusController extends Controller
 
     public function print_pdf(){
         $reservationStatus = ReservationStatus::with('reservation')->get();
-        // dd($reservationStatus);
         $pdf = PDF::loadview('admin.print_pdf', ['reservationStatus'=>$reservationStatus]);
         return $pdf->stream();
 

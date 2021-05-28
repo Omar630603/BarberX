@@ -174,6 +174,7 @@ class ReservationController extends Controller
         return redirect()->route('reservation.index')
             ->with('success', 'Reservation seccesfully Deleted');
     }
+    
     public function printReservationPDF(Reservation $reservation)
     {
         $reservationStatus = ReservationStatus::all();

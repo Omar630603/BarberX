@@ -23760,3 +23760,12 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
 .fc{
     width: 100%;
 }
+
+.fc-day-header {
+    background: #00aced;
+    color: white;
+}
+
+.fc-left{
+    color: rgb(75, 138, 211);
+}
