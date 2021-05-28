@@ -18,17 +18,33 @@
                     <table class="table table-hover" style="margin-top: 10px;">
                         <thead>
                             <tr>
-                                <th>reservation code</th>
-                                <th>tanggal</th>
+                                <th>Reservation Code</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @if (count($reservation)>0)
                             @foreach($reservation as $s)
                             <tr>
                                 <td>{{$s->reservation_code}}</td>
                                 <td>{{$s->reservation_time}}</td>
+                                @foreach ($reservationStatus as $rStatus)
+                                @if ($s->reservation_code == $rStatus->reservation_code)
+                                <td>Total: {{$rStatus->price}}</td>
+                                @if ($rStatus->status)
+                                <td>Done</td>
+                                @else
+                                <td>Waiting Customer</td>
+                                @endif
+                                @endif
+                                @endforeach
                             </tr>
                             @endforeach
+                            @else
+                            <p>No Reservation: on {{$selectDate}}</p>
+                            @endif
                         </tbody>
                     </table>
                 </div>

@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="reservation_time" class="col-sm-3 col-form-label">Phone</label>
+                        <label for="reservation_time" class="col-sm-3 col-form-label">Reservation Time</label>
                         <div class="col-sm-8">
                             <input type="datetime-local" class="form-control" id="reservation_time"
                                 placeholder="Enter Reservation Time" name="reservation_time">

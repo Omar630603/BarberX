@@ -13,17 +13,16 @@ class FullCalendarController extends Controller
     {
 
         $date = $request->tanggal;
-        if($date){
-        $reservation = Reservation::with('reservationStatus')->search(['reservation_time'], $date)->get();
-        $selectDate = $date;
-        }
-        else{
+        if ($date) {
+            $reservation = Reservation::with('reservationStatus')->search(['reservation_time'], $date)->orderBy('reservation_time', 'desc')->groupBy('reservation_code')->get();
+            $selectDate = $date;
+        } else {
 
             $today = Carbon::now()->toDateString();
             $reservation = Reservation::with('reservationStatus')->search(['reservation_time'], $today)->get();
             $selectDate = $today;
         }
-        return view('admin.calendarIndex', compact('reservation', 'selectDate'));
-        
+        $reservationStatus = ReservationStatus::all();
+        return view('admin.calendarIndex', compact('reservation', 'selectDate', 'reservationStatus'));
     }
 }
