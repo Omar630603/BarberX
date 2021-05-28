@@ -7,6 +7,7 @@ use App\Models\Service;
 use App\Models\Reservation;
 use App\Models\ReservationStatus;
 use Illuminate\Http\Request;
+use PDF;
 
 class ReservationController extends Controller
 {
@@ -172,5 +173,12 @@ class ReservationController extends Controller
         }
         return redirect()->route('reservation.index')
             ->with('success', 'Reservation seccesfully Deleted');
+    }
+    public function printReservationPDF(Reservation $reservation)
+    {
+        $reservationStatus = ReservationStatus::all();
+        $reservationServices = Reservation::with('service')->get();
+        $pdf = PDF::loadview('admin.printReservationPDF', ['r' => $reservation, 'reservationStatus' => $reservationStatus, 'reservationServices' => $reservationServices]);
+        return $pdf->stream();
     }
 }

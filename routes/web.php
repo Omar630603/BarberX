@@ -78,3 +78,6 @@ Route::resource('employee', EmployeeController::class);
 
 // Calendar Route
 Route::get('/calendar', [FullCalendarController::class, 'index'])->name('calendar.index');
+
+// Calendar Route
+Route::get('/reservation/printPdf/{reservation}', [ReservationController::class, 'printReservationPDF'])->name('printReservationPDF');

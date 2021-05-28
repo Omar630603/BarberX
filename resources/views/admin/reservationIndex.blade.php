@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="reservation_time" class="col-sm-3 col-form-label">Phone</label>
+                        <label for="reservation_time" class="col-sm-3 col-form-label">Reservation Time</label>
                         <div class="col-sm-8">
                             <input type="datetime-local" class="form-control" id="reservation_time"
                                 placeholder="Enter Reservation Time" name="reservation_time">
@@ -172,8 +172,10 @@
                                                 {{$r->customer->name}}'s Reservation</h5>
                                             <h6 class="mt-3">Code Reservation: <b>{{$r->reservation_code}}</b></h6>
                                         </div>
-                                        <button style="border-radius:5px" class="btn btn-sm btn-success">Print
-                                            PDF</button>
+                                        <a style="border-radius:5px" class="btn btn-sm btn-success"
+                                            href="{{route('printReservationPDF', $r)}}" target="_blank"
+                                            rel="noopener noreferrer">Print
+                                            PDF</a>
                                     </div>
                                     <div class="modal-body">
                                         <div
