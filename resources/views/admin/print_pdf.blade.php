@@ -1,6 +1,4 @@
-@extends('layouts.admin')
-@section('content')
-<table class="table table-hover" id="serviceTable">
+<table class="table table-bordered" id="serviceTable">
     <thead>
         <tr>
             <th>Reservation Code</th>
@@ -26,5 +24,3 @@
         @endforeach
     </tbody>
 </table>
-
-@endsection

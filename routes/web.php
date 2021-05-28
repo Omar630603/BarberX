@@ -81,4 +81,4 @@ Route::get('/calendar', [FullCalendarController::class, 'index'])->name('calenda
 
 // print pdf route Route
 Route::get('/reservation/printPdf/{reservation}', [ReservationController::class, 'printReservationPDF'])->name('printReservationPDF');
-Route::get('/reservationStatus/printPdf', [ReservationStatusController::class, 'print_pdf'])->name('print_pdf');
+Route::get('/reservationStatus/printPdf/all', [ReservationStatusController::class, 'print_pdf'])->name('printPdf');

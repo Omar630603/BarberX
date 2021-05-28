@@ -50,7 +50,7 @@
 
                     </form>
                 </div>
-                <a type="button" class="btn btn-primary ml-3" href="{{route('print_pdf')}}" target="_blank"
+                <a type="button" class="btn btn-primary ml-3" href="{{route('printPdf')}}" target="_blank"
                     rel="noopener noreferrer"><i class="ti-download"></i>Export To PDF</a>
             </div>
         </div>
