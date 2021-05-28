@@ -23743,3 +23743,20 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
     white-space: -moz-pre-wrap;
     white-space: -pre-wrap;
 }
+
+
+.fc-prev-button{
+    background: #00aced;
+    border: none;
+    color: white;
+}
+
+.fc-next-button {
+    background: #00aced;
+    border: none;
+    color: white;
+}
+
+.fc{
+    width: 100%;
+}

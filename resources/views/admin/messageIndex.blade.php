@@ -87,7 +87,6 @@
                                     Yes
                                     @else
                                     No
-
                                     @endif
                                 </div>
                                 <div id="editMessage{{$m->message_id}}" style="display:none">

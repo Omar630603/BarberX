@@ -28,6 +28,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/assetsAdmin/icon/themify-icons/themify-icons.css')}}">
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/assetsAdmin/icon/icofont/css/icofont.css')}}">
+    {{-- Full Calendar Style --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/assetsAdmin/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/assetsAdmin/css/jquery.mCustomScrollbar.css')}}">
@@ -148,6 +150,7 @@
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Menu</div>
+
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
@@ -247,17 +250,24 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                            </ul>
-                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Login</div>
-                            <ul class="pcoded-item pcoded-left-item">
                                 <li class="pcoded">
-                                    <a href="{{route('login')}}">
-                                        <span class="pcoded-micon"><i class="ti-key"></i><b>D</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Login</span>
+                                    <a href="{{url('calendar')}}">
+                                        <span class=" pcoded-micon"><i class="ti-calendar"></i><b>D</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Calendar</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                             </ul>
+                            {{-- <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Login</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="pcoded">
+                                    <a href="{{route('login')}}">
+                            <span class="pcoded-micon"><i class="ti-key"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Login</span>
+                            <span class="pcoded-mcaret"></span>
+                            </a>
+                            </li>
+                            </ul> --}}
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -289,6 +299,10 @@
     <!-- modernizr js -->
     <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/modernizr/modernizr.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/modernizr/css-scrollbars.js')}}"></script>
+    {{-- FullCalendar --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- classie js -->
     <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/classie/classie.js')}}"></script>
     <!-- Custom js -->

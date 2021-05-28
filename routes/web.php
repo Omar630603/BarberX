@@ -11,6 +11,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReservationStatusController;
+use App\Http\Controllers\FullCalendarController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -72,3 +73,6 @@ Route::get('/profile', function () {
 
 // Employee Route
 Route::resource('employee', EmployeeController::class);
+
+// Calendar Route
+Route::get('/calendar', [FullCalendarController::class, 'index'])->name('calendar.index');
