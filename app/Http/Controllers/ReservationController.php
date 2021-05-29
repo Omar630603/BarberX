@@ -164,8 +164,8 @@ class ReservationController extends Controller
         $reservationServices = Reservation::where('reservation_code', $reservation->reservation_code)->pluck('service_id');
         $reservationServicesArray = json_decode(json_encode($reservationServices), true);
         $service_id = $request->get('service_id');
-        if (empty($service_id) && empty($reservationServicesArray)) {
-            return redirect()->route('reservation.edit', $reservation)->with('fail', 'Cheack the service');
+        if (empty($service_id)) {
+            return redirect()->route('reservation.edit', $reservation)->with('fail', 'Nothing to Change');
         } else {
             $resultToDelete = array_diff($reservationServicesArray, $service_id);
             $resultToAdd = array_diff($service_id, $reservationServicesArray);
@@ -215,7 +215,7 @@ class ReservationController extends Controller
                     $key->save();
                 }
             } else {
-                return redirect()->route('reservation.edit', $reservation)->with('fail', 'Cheack Reservation Time');
+                return redirect()->route('reservation.edit', $reservation)->with('info', 'Cheack Reservation Time');
             }
             return redirect()->route('reservation.edit', $reservation)->with('success', 'Updated Successfully');
         }

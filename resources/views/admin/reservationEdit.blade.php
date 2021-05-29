@@ -11,6 +11,11 @@
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Success!!</strong><span> {{ $message }}</span>
     </div>
+    @elseif ($message = Session::get('info'))
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Info!!</strong><span> {{ $message }}</span>
+    </div>
     @endif
 </div>
 <div class="page-body">
