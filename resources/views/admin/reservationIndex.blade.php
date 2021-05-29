@@ -145,8 +145,7 @@
                             <td>{{$r->customer->name}}</td>
                             <td>{{$r->reservation_time}}</td>
                             <td style="display: flex; justify-content: space-between">
-                                <a type="button" class="btn btn-warning"
-                                    href="{{ route('reservation.edit', $r->reservation_id) }}"><i
+                                <a type="button" class="btn btn-warning" href="{{ route('reservation.edit', $r) }}"><i
                                         class="ti-marker-alt"></i></a>
                                 <form style="display: none" id="deleteReservation{{$r->reservation_id}}"
                                     action="{{ route('reservation.destroy', $r->reservation_id) }}" method="POST">

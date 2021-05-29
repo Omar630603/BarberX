@@ -144,7 +144,12 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        //
+        $reservationCustomer = Reservation::with('customer')->where('reservation_code', $reservation->reservation_code)->first();
+        $reservationServices = Reservation::where('reservation_code', $reservation->reservation_code)->pluck('service_id');
+        $reservationServices = json_decode(json_encode($reservationServices), true);
+        $reservation = Reservation::where('reservation_code', $reservation->reservation_code)->get();
+        $services = Service::all();
+        return view('admin.reservationEdit', ['reservation' => $reservation, 'services' => $services, 'reservationServices' => $reservationServices, 'reservationCustomer' => $reservationCustomer]);
     }
 
     /**
@@ -156,7 +161,64 @@ class ReservationController extends Controller
      */
     public function update(Request $request, Reservation $reservation)
     {
-        //
+        $reservationServices = Reservation::where('reservation_code', $reservation->reservation_code)->pluck('service_id');
+        $reservationServicesArray = json_decode(json_encode($reservationServices), true);
+        $service_id = $request->get('service_id');
+        if (empty($service_id) && empty($reservationServicesArray)) {
+            return redirect()->route('reservation.edit', $reservation)->with('fail', 'Cheack the service');
+        } else {
+            $resultToDelete = array_diff($reservationServicesArray, $service_id);
+            $resultToAdd = array_diff($service_id, $reservationServicesArray);
+            if (!empty($resultToDelete)) {
+                foreach ($resultToDelete as $key) {
+                    $reservationsToDelete = Reservation::where('reservation_code', $reservation->reservation_code)->where('service_id', $key)->first();
+                    $reservationsToDelete->delete();
+                }
+            }
+            $total = 0;
+            $reservationCustomer = Reservation::with('customer')->where('reservation_code', $reservation->reservation_code)->first();
+            if (!empty($resultToAdd)) {
+                foreach ($resultToAdd as $key) {
+                    $reservation = new Reservation;
+                    $reservation->customer()->associate($reservationCustomer->customer);
+                    $service = new Service;
+                    $service->service_id = $key;
+                    $reservation->service()->associate($service);
+                    $reservation->reservation_time = $reservationCustomer->reservation_time;
+                    $reservation->reservation_code = $reservationCustomer->reservation_code;
+                    $svcprice = Service::where('service_id', $key)->first();
+                    $total += $svcprice->price;
+                    $reservation->save();
+                }
+            }
+            $reservationStatus = ReservationStatus::where('reservation_code', $reservation->reservation_code)->first();
+            if ($reservationStatus) {
+                $reservationStatus->price = $reservationStatus->price + $total;
+                $reservationStatus->save();
+            } else {
+                $totalNew = 0;
+                foreach ($service_id as $key) {
+                    $svcprice = Service::where('service_id', $key)->first();
+                    $totalNew += $svcprice->price;
+                }
+                $reservationStatus = new ReservationStatus;
+                $reservationStatus->reservation_code = $reservationCustomer->reservation_code;
+                $reservationStatus->price = $totalNew;
+                $reservationStatus->status = 0;
+                $reservationStatus->save();
+            }
+            if ($request->get('reservation_time')) {
+                $reservations = Reservation::where('reservation_code', $reservation->reservation_code)->get();
+                echo $reservations;
+                foreach ($reservations as $key) {
+                    $key->reservation_time = $request->get('reservation_time');
+                    $key->save();
+                }
+            } else {
+                return redirect()->route('reservation.edit', $reservation)->with('fail', 'Cheack Reservation Time');
+            }
+            return redirect()->route('reservation.edit', $reservation)->with('success', 'Updated Successfully');
+        }
     }
 
     /**
@@ -174,7 +236,7 @@ class ReservationController extends Controller
         return redirect()->route('reservation.index')
             ->with('success', 'Reservation seccesfully Deleted');
     }
-    
+
     public function printReservationPDF(Reservation $reservation)
     {
         $reservationStatus = ReservationStatus::all();
