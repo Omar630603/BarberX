@@ -47,6 +47,9 @@ Route::get('/admin/index', function () {
     return redirect()->route('login');
 });
 Route::resource('/admins', UserController::class);
+Route::get('/profile/{params}', [UserController::class, 'profile'])->name('user.profile');
+Route::put('/profile/image/{params}', [UserController::class, 'updateImage'])->name('user.updateImage');
+Route::put('/profile/{params}', [UserController::class, 'updateBio'])->name('user.updateBio');
 // Sementara, nanti bisa diubah
 
 // Reservation Route

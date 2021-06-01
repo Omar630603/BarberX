@@ -123,7 +123,7 @@
                                 </a>
                                 <ul class="show-notification profile-notification">
                                     <li>
-                                        <a href="{{url('profile')}}">
+                                        <a href="{{route('user.profile', Auth::user()->user_id)}}">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>

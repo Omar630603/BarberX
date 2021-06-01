@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Auth;
 
 class UserController extends Controller
 {
@@ -30,6 +31,45 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function profile($iduser){
+        // $idUser = Auth::User->user_id;
+        $user = User::where('user_id', $iduser)->first();
+        return view('admin.profile', compact('user'));
+    }
+
+    public function updateImage(Request $request, $iduser){
+        $request->validate([
+            'image' => 'required',
+        ]);
+        $user = User::where('user_id', $iduser)->first();
+        if ($request->file('image')) {
+            Storage::delete('public/' . $user->image);
+            $image = $request->file('image')->store('images', 'public');
+            $user->image = $image;
+        }
+
+        $user->save();
+        return redirect()->route('user.profile', $iduser)
+            ->with('success', 'Profile Photo updated');
+    }
+
+    public function updateBio(Request $request, $iduser){
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        $user = User::where('user_id', $iduser)->first();
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->password = $request->get('password');
+        $user->save();
+        return redirect()->route('user.profile', $iduser)
+            ->with('success', 'Profile Photo updated');
+    }
+
     public function create()
     {
         //

@@ -217,7 +217,7 @@ class ReservationController extends Controller
             } else {
                 return redirect()->route('reservation.edit', $reservation)->with('info', 'Cheack Reservation Time');
             }
-            return redirect()->route('reservation.edit', $reservation)->with('success', 'Updated Successfully');
+            return redirect()->route('reservation.index', $reservation)->with('success', 'Updated Successfully');
         }
     }
 

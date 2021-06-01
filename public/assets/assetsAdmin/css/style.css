@@ -23769,3 +23769,19 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
 .fc-left{
     color: rgb(75, 138, 211);
 }
+
+.title-profile{
+    color: #0275d8;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.content-profile{
+    font-size: 15px;
+}
+
+.main-title{
+    font-size: 25px;
+    font-weight: bold;
+    color: #8f6bf1;
+}
