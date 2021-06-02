@@ -33,13 +33,15 @@ class UserController extends Controller
      */
 
 
-    public function profile($iduser){
+    public function profile($iduser)
+    {
         // $idUser = Auth::User->user_id;
         $user = User::where('user_id', $iduser)->first();
         return view('admin.profile', compact('user'));
     }
 
-    public function updateImage(Request $request, $iduser){
+    public function updateImage(Request $request, $iduser)
+    {
         $request->validate([
             'image' => 'required',
         ]);
@@ -55,7 +57,8 @@ class UserController extends Controller
             ->with('success', 'Profile Photo updated');
     }
 
-    public function updateBio(Request $request, $iduser){
+    public function updateBio(Request $request, $iduser)
+    {
         $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -64,7 +67,7 @@ class UserController extends Controller
         $user = User::where('user_id', $iduser)->first();
         $user->name = $request->get('name');
         $user->email = $request->get('email');
-        $user->password = $request->get('password');
+        $user->password = Hash::make($request->get('password'));
         $user->save();
         return redirect()->route('user.profile', $iduser)
             ->with('success', 'Profile Photo updated');
