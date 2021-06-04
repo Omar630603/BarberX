@@ -46,8 +46,8 @@
                             <div class="form-group">
                                 <label for="name" class="col-form-label">Password</label>
                                 <div class="">
-                                    <input type="password" class="form-control" id="password"
-                                        value="{{Auth::user()->password}}" name="password">
+                                    <input type="password" class="form-control" id="password" placeholder="New Password"
+                                        name="password">
                                 </div>
                             </div>
                             <a href="#" class="btn btn-sm btn-primary btn-outline-primary mt-3"
@@ -77,13 +77,10 @@
                         <h5 class="title-profile">Email:</h5>
                         <p class="content-profile">{{Auth::user()->email}}</p>
                         <hr>
-                        <h5 class="title-profile">Password:</h5>
-                        <p class="content-profile">{{Auth::user()->password}}</p>
-                        <hr>
                         <div>
                             <button class="btn btn-sm btn-primary"
                                 onclick="$('#formEdit').fadeIn('slow'); $('#info-bio').fadeOut(); return false;">Edit
-                                Profile</button>
+                                Profile & Change Password</button>
                         </div>
                     </div>
                 </div>

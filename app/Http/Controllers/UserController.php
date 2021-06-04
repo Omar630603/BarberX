@@ -62,12 +62,13 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required',
         ]);
         $user = User::where('user_id', $iduser)->first();
         $user->name = $request->get('name');
         $user->email = $request->get('email');
-        $user->password = Hash::make($request->get('password'));
+        if ($request->get('password')) {
+            $user->password = Hash::make($request->get('password'));
+        }
         $user->save();
         return redirect()->route('user.profile', $iduser)
             ->with('success', 'Profile Photo updated');
