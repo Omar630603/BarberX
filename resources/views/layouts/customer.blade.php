@@ -68,12 +68,12 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav ml-auto">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="service.html" class="nav-item nav-link">Service Category</a>
-                        <a href="price.html" class="nav-item nav-link">Our Service</a>
-                        <a href="team.html" class="nav-item nav-link">Barber</a>
-                        <a href="portfolio.html" class="nav-item nav-link">Gallery</a>
-                        <a href="portfolio.html" class="nav-item nav-link">Reservation</a>
-                        <a href="contact.html" class="nav-item nav-link">Message</a>
+                        <a href="{{route('categoryServiceCustomer')}}" class="nav-item nav-link">Service Category</a>
+                        <a href="{{route('serviceCustomer')}}" class="nav-item nav-link">Our Service</a>
+                        <a href="{{route('employeeCustomer')}}" class="nav-item nav-link">Barber</a>
+                        <a href="{{route('galleryCustomer')}}" class="nav-item nav-link">Gallery</a>
+                        <a href="{{route('reservationCustomer')}}" class="nav-item nav-link">Reservation</a>
+                        <a href="{{route('messageCustomer')}}" class="nav-item nav-link">Message</a>
                     </div>
                 </div>
             </div>

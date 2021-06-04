@@ -17,6 +17,11 @@ class GalleryController extends Controller
         return view('admin.galleryIndex', compact('gallery', 'categoryService'));
     }
 
+    public function galleryCustomer(){
+        $gallery = Gallery::with('categoryService')->get();
+        return view('customer.gallery', compact('gallery'));
+    }
+
     
     public function create()
     {

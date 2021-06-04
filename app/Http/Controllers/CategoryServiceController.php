@@ -21,6 +21,12 @@ class CategoryServiceController extends Controller
     }
 
 
+    public function categoryServiceCustomer(){
+        $categoryService = CategoryService::get();
+        return view('customer.CategoryService', compact('categoryService'));
+    }
+
+
     public function create()
     {
         //

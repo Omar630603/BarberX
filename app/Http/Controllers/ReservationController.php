@@ -11,11 +11,7 @@ use PDF;
 
 class ReservationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index(Request $request)
     {
         $search = $request->get('search');
@@ -30,22 +26,17 @@ class ReservationController extends Controller
         return view('admin.reservationIndex', compact('reservation', 'service', 'reservationServices', 'reservationStatus'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function reservationCustomer(){
+        return view('customer.reservation');
+    }
+
+    
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $service_id = $request->get('service_id');
@@ -125,23 +116,13 @@ class ReservationController extends Controller
             $length_of_string
         );
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Reservation  $reservation
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show(Reservation $reservation)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Reservation  $reservation
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(Reservation $reservation)
     {
         $reservationCustomer = Reservation::with('customer')->where('reservation_code', $reservation->reservation_code)->first();
@@ -152,13 +133,7 @@ class ReservationController extends Controller
         return view('admin.reservationEdit', ['reservation' => $reservation, 'services' => $services, 'reservationServices' => $reservationServices, 'reservationCustomer' => $reservationCustomer]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Reservation  $reservation
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, Reservation $reservation)
     {
         $reservationServices = Reservation::where('reservation_code', $reservation->reservation_code)->pluck('service_id');
@@ -221,12 +196,7 @@ class ReservationController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Reservation  $reservation
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Reservation $reservation)
     {
         $reservations = Reservation::where('reservation_code', $reservation->reservation_code)->get();

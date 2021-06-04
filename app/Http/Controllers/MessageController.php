@@ -21,6 +21,10 @@ class MessageController extends Controller
         return view('admin.messageIndex', compact('msg'));
     }
 
+    public function messageCustomer(){
+        return view('customer.message');
+    }
+
 
     public function create()
     {

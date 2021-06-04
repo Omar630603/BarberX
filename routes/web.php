@@ -85,3 +85,13 @@ Route::get('/calendar', [FullCalendarController::class, 'index'])->name('calenda
 // print pdf route Route
 Route::get('/reservation/printPdf/{reservation}', [ReservationController::class, 'printReservationPDF'])->name('printReservationPDF');
 Route::get('/reservationStatus/printPdf/all', [ReservationStatusController::class, 'print_pdf'])->name('printPdf');
+
+
+
+// Customer Route
+Route::get('/categoryService/all/customer', [CategoryServiceController::class, 'categoryServiceCustomer'])->name('categoryServiceCustomer');
+Route::get('/service/all/customer', [ServiceController::class, 'serviceCustomer'])->name('serviceCustomer');
+Route::get('/employee/all/customer', [EmployeeController::class, 'employeeCustomer'])->name('employeeCustomer');
+Route::get('/gallery/all/customer', [GalleryController::class, 'galleryCustomer'])->name('galleryCustomer');
+Route::get('/reservation/all/customer', [reservationController::class, 'reservationCustomer'])->name('reservationCustomer');
+Route::get('/message/all/customer', [messageController::class, 'messageCustomer'])->name('messageCustomer');

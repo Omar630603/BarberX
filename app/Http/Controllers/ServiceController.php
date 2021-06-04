@@ -22,6 +22,10 @@ class ServiceController extends Controller
         return view('admin.service', compact('service', 'categoryService'));
     }
 
+    public function serviceCustomer(){
+        return view('customer.service');
+    }
+
 
     public function create()
     {

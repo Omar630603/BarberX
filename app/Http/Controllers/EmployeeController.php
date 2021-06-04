@@ -20,6 +20,9 @@ class EmployeeController extends Controller
         return view('admin.employeeIndex', compact('employee'));
     }
 
+    public function employeeCustomer(){
+        return view('customer.employee');
+    }
    
     public function create()
     {

@@ -27,7 +27,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="service-item">
                     <div class="service-img">
-                        <img src="img/service-1.jpg" alt="Image">
+                        <img src="{{asset('assets/assetsCustomer/img/service-1.jpg')}}" alt="Image">
                     </div>
                     <h3>Hair Cut</h3>
                     <p>
@@ -39,7 +39,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="service-item">
                     <div class="service-img">
-                        <img src="img/service-2.jpg" alt="Image">
+                        <img src="{{asset('assets/assetsCustomer/img/service-2.jpg')}}" alt="Image">
                     </div>
                     <h3>Beard Style</h3>
                     <p>
@@ -51,7 +51,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="service-item">
                     <div class="service-img">
-                        <img src="img/service-3.jpg" alt="Image">
+                        <img src="{{asset('assets/assetsCustomer/img/service-2.jpg')}}" alt="Image">
                     </div>
                     <h3>Color & Wash</h3>
                     <p>
