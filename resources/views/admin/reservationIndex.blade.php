@@ -12,6 +12,16 @@
         <strong>Success!!</strong><span> {{ $message }}</span>
     </div>
     @endif
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 </div>
 <div class="page-body">
     <div class="card">
@@ -57,17 +67,7 @@
 
 
             {{-- Add Data --}}
-            <div class="mx-3" style="display:none;" id="formAddReservation">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
+            <div class="mx-3" style="display:none;" id="formAddReservation"> 
                 <h4 class="mb-3">New Customer</h4>
                 <form method="post" action="{{ route('reservation.store') }}" id="myForm" enctype="multipart/form-data">
                     @csrf
@@ -205,7 +205,7 @@
                                                         Service: {{$rS->service->name}}<br>
                                                         Price: {{$rS->service->price}}
                                                         <img width="50px" height="50px" style="border-radius: 10%"
-                                                            src="{{asset('storage/'.$r->service->image)}}"></li>
+                                                            src="{{asset('storage/'.$rS->service->image)}}"></li>
                                                     @endif
                                                     @endforeach
                                                 </ul>

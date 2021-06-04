@@ -1403,6 +1403,122 @@ a:focus {
     color: #D5B981;
 }
 
+.formReservation{
+    display: block;
+    border: 1px solid black !important;
+    align-items: center;
+    background: #1D2434;
+
+}
+.main-title{
+    font-weight: bold;
+    color: #D5B981;
+    margin: 0px;
+    margin-top: 50px;
+}
+
+.sub-title{
+    font-weight: bold;
+    margin: 20px 0px;
+    color: #D5B981;
+}
+
+
+#myForm{
+    width: 100% !important;
+    margin-bottom: 50px;
+    
+}
+.content-form{
+    padding: 0px 150px;
+    align-items: center;
+}
+.serviceBox{
+    display: flex;
+    gap:10px;
+    margin-bottom: 15px;
+    width: 150px;
+    
+}
+
+.labelService, .serviceName, .servicePrice{
+    color: #ac9466;
+    font-size: 12px;
+}
+
+
+#myForm input{
+    border: none;
+    border-radius: 0px;
+    border-bottom: 1px solid #D5B981;
+    background: none;
+    color: #aa9263;
+    
+}
+
+#myForm label{
+    color: #D5B981;
+}
+
+
+.checkboxContainer{
+    border: none;
+    border-radius: 0px;
+    border-bottom: 1px solid #D5B981;
+    display: flex;
+    flex-wrap: wrap;  
+    justify-content: space-between;
+
+}
+
+.checkboxService{
+    border-radius: 0px !important;
+    border: 1px solid #D5B981 !important;
+}
+
+.serviceForm{
+    border: 1px solid black !important;
+    font-size: 18px;
+
+}
+
+
+
+.btn-reservation{
+    margin-top: 20px;
+    color: #D5B981;
+    padding: 15px;
+    width: 150px;
+    border: 1px solid #D5B981;
+    border-radius: 0px;
+    background: none;
+}
+
+.btn-reservation:hover{
+    color: #1D2434;
+    border: 1px solid #1D2434;
+    border-radius: 0px;
+    background: #D5B981;
+}
+
+.buttonAddPhoto{
+    border-radius: 0;
+    border: 1px solid #D5B981;
+    background: #D5B981  !important;
+    color: #1d2434 !important;
+    float: right;
+    
+}
+.buttonAddPhoto:hover{
+    color: #D5B981 !important;
+    background: rgb(43, 43, 43)  !important;
+
+    
+}
+
+
+
+
 @media (max-width: 767.98px) {
     .footer .copyright p,
     .footer .copyright .col-md-6:last-child p {
@@ -1410,3 +1526,5 @@ a:focus {
         text-align: center;
     }
 }
+
+

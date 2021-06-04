@@ -27,7 +27,8 @@ class ReservationController extends Controller
     }
 
     public function reservationCustomer(){
-        return view('customer.reservation');
+        $service = Service::all();
+        return view('customer.reservation', compact( 'service'));
     }
 
     
@@ -80,6 +81,13 @@ class ReservationController extends Controller
             $reservationStatus->status = 0;
             $reservationStatus->save();
 
+            if($request->get('customer')){
+                $reservationStatus = ReservationStatus::all();
+                $reservationServices = Reservation::with('service')->get();
+                $r = $reservation;
+                return view('customer.reservationDetail', compact('r', 'reservationStatus', 'reservationServices'));
+
+            }
 
             return redirect()->route('reservation.index')
                 ->with('success', 'New Reservation Added Succesfully');
