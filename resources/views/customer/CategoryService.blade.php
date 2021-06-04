@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2>Service</h2>
+                <h2>Category Service</h2>
             </div>
             <div class="col-12">
                 <a href="">Home</a>
@@ -24,42 +24,26 @@
             <h2>Best Salon and Barber Services for You</h2>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item">
-                    <div class="service-img">
-                        <img src="{{asset('assets/assetsCustomer/img/service-1.jpg')}}" alt="Image">
+            @if (count($categoryService)<=0) <center>
+                <h2>There are no Category Services</h2>
+                </center>
+                @else
+                @foreach ($categoryService as $cs)
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item">
+                        <div class="service-img">
+                            <img src="{{asset('storage/'.$cs->image)}}" alt="Image">
+                        </div>
+                        <h3>{{$cs->name}}</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit
+                            non
+                        </p>
+                        <a class="btn" href="{{route('serviceCustomer')}}">Learn More</a>
                     </div>
-                    <h3>Hair Cut</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non
-                    </p>
-                    <a class="btn" href="">Learn More</a>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item">
-                    <div class="service-img">
-                        <img src="{{asset('assets/assetsCustomer/img/service-2.jpg')}}" alt="Image">
-                    </div>
-                    <h3>Beard Style</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non
-                    </p>
-                    <a class="btn" href="">Learn More</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item">
-                    <div class="service-img">
-                        <img src="{{asset('assets/assetsCustomer/img/service-2.jpg')}}" alt="Image">
-                    </div>
-                    <h3>Color & Wash</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non
-                    </p>
-                    <a class="btn" href="">Learn More</a>
-                </div>
-            </div>
+                @endforeach
+                @endif
         </div>
     </div>
 </div>

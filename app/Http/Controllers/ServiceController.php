@@ -22,8 +22,10 @@ class ServiceController extends Controller
         return view('admin.service', compact('service', 'categoryService'));
     }
 
-    public function serviceCustomer(){
-        return view('customer.service');
+    public function serviceCustomer()
+    {
+        $services = Service::with('categoryService')->get();
+        return view('customer.service', compact('services'));
     }
 
 

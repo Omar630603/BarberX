@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         $search = $request->get('search');
@@ -20,16 +20,17 @@ class EmployeeController extends Controller
         return view('admin.employeeIndex', compact('employee'));
     }
 
-    public function employeeCustomer(){
-        return view('customer.employee');
-    }
-   
-    public function create()
+    public function employeeCustomer()
     {
-        
+        $employees = Employee::get();
+        return view('customer.barber', compact('employees'));
     }
 
-   
+    public function create()
+    {
+    }
+
+
     public function store(Request $request)
     {
         $request->validate([
@@ -56,21 +57,21 @@ class EmployeeController extends Controller
             ->with('success', 'Employee Successfully Added');
     }
 
-   
+
     public function show(Employee $employee)
     {
         //
     }
 
-   
+
     public function edit($idemployee)
     {
         $employee = Employee::where('employee_id', $idemployee)
-             ->first();
+            ->first();
         return view('admin.employeeEdit', ['employee' => $employee]);
     }
 
-   
+
     public function update(Request $request, $idemployee)
     {
         $request->validate([
@@ -81,7 +82,7 @@ class EmployeeController extends Controller
         ]);
 
         $employee = Employee::where('employee_id', $idemployee)
-             ->first();
+            ->first();
 
         if ($request->file('image')) {
             if ($employee->image && file_exists(storage_path('app/public/' . $employee->image))) {
@@ -106,7 +107,7 @@ class EmployeeController extends Controller
     public function destroy($idemployee)
     {
         $employee = Employee::where('employee_id', $idemployee)
-                    ->first();
+            ->first();
         Storage::delete('public/' . $employee->image);
         $employee->delete();
         return redirect()->route('employee.index')

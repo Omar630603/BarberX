@@ -107,7 +107,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{route('home')}}">
+                                <a href="/">
                                     <span><i class="icofont icofont-home"></i> Home</span>
                                 </a>
                             </li>

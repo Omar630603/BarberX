@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Reservation as MailReservation;
 use App\Models\Customer;
 use App\Models\Service;
 use App\Models\Reservation;
 use App\Models\ReservationStatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use PDF;
 
 class ReservationController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         $search = $request->get('search');
@@ -26,18 +28,19 @@ class ReservationController extends Controller
         return view('admin.reservationIndex', compact('reservation', 'service', 'reservationServices', 'reservationStatus'));
     }
 
-    public function reservationCustomer(){
+    public function reservationCustomer()
+    {
         $service = Service::all();
-        return view('customer.reservation', compact( 'service'));
+        return view('customer.reservation', compact('service'));
     }
 
-    
+
     public function create()
     {
         //
     }
 
-    
+
     public function store(Request $request)
     {
         $service_id = $request->get('service_id');
@@ -81,14 +84,15 @@ class ReservationController extends Controller
             $reservationStatus->status = 0;
             $reservationStatus->save();
 
-            if($request->get('customer')){
-                $reservationStatus = ReservationStatus::all();
-                $reservationServices = Reservation::with('service')->get();
-                $r = $reservation;
+            $reservationStatus = ReservationStatus::all();
+            $reservationServices = Reservation::with('service')->get();
+            $r = $reservation;
+
+            if ($request->get('customer')) {
+                Mail::to($reservation->customer->email)->send(new MailReservation($r, $reservationServices, $reservationStatus));
                 return view('customer.reservationDetail', compact('r', 'reservationStatus', 'reservationServices'));
-
             }
-
+            Mail::to($reservation->customer->email)->send(new MailReservation($r, $reservationServices, $reservationStatus));
             return redirect()->route('reservation.index')
                 ->with('success', 'New Reservation Added Succesfully');
         }
@@ -124,13 +128,13 @@ class ReservationController extends Controller
             $length_of_string
         );
     }
-   
+
     public function show(Reservation $reservation)
     {
         //
     }
 
-    
+
     public function edit(Reservation $reservation)
     {
         $reservationCustomer = Reservation::with('customer')->where('reservation_code', $reservation->reservation_code)->first();
@@ -141,7 +145,7 @@ class ReservationController extends Controller
         return view('admin.reservationEdit', ['reservation' => $reservation, 'services' => $services, 'reservationServices' => $reservationServices, 'reservationCustomer' => $reservationCustomer]);
     }
 
-   
+
     public function update(Request $request, Reservation $reservation)
     {
         $reservationServices = Reservation::where('reservation_code', $reservation->reservation_code)->pluck('service_id');
@@ -204,7 +208,7 @@ class ReservationController extends Controller
         }
     }
 
-    
+
     public function destroy(Reservation $reservation)
     {
         $reservations = Reservation::where('reservation_code', $reservation->reservation_code)->get();

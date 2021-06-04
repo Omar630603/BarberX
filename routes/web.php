@@ -14,6 +14,7 @@ use App\Http\Controllers\ReservationStatusController;
 use App\Http\Controllers\FullCalendarController;
 use Illuminate\Support\Facades\Auth;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,9 +26,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [UserController::class, 'indexCustomer']);
 
 Auth::routes();
 

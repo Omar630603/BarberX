@@ -26,50 +26,24 @@
             <h2>Meet Our Hair Cut Expert Barber</h2>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-md-6">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="img/team-1.jpg" alt="Team Image">
-                    </div>
-                    <div class="team-text">
-                        <h2>Adam Phillips</h2>
-                        <p>Master Barber</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="img/team-2.jpg" alt="Team Image">
-                    </div>
-                    <div class="team-text">
-                        <h2>Dylan Adams</h2>
-                        <p>Hair Expert</p>
+            @if (count($employees)<=0) <center>
+                <h2>There are no Employees</h2>
+                </center>
+                @else
+                @foreach ($employees as $employee)
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-item">
+                        <div class="team-img">
+                            <img src="{{ asset('storage/'.$employee->image) }}" alt="Team Image">
+                        </div>
+                        <div class="team-text">
+                            <h2>{{$employee->name}}</h2>
+                            <p>{{$employee->skill}}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="img/team-3.jpg" alt="Team Image">
-                    </div>
-                    <div class="team-text">
-                        <h2>Gloria Edwards</h2>
-                        <p>Beard Expert</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="img/team-4.jpg" alt="Team Image">
-                    </div>
-                    <div class="team-text">
-                        <h2>Josh Dunn</h2>
-                        <p>Color Expert</p>
-                    </div>
-                </div>
-            </div>
+                @endforeach
+                @endif
         </div>
     </div>
 </div>
