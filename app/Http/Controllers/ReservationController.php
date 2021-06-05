@@ -34,6 +34,26 @@ class ReservationController extends Controller
         return view('customer.reservation', compact('service'));
     }
 
+    public function searchByCustomer(Request $request){
+        $search = $request->get('search');
+        if ($request->get('search')) {
+            $reservation = Reservation::with('customer', 'service')->search(['reservation_code'], $search)->groupBy('reservation_code')->first();
+        } else {
+           $reservation = "";
+        }
+        $reservationStatus = ReservationStatus::all();
+        $reservationServices = Reservation::with('service')->get();
+        $service = Service::all();
+        $r = $reservation;
+        if($reservation !== null){
+            return view('customer.searchResult', compact('r', 'service', 'reservationServices', 'reservationStatus'));
+        }
+        else{
+            return redirect()->route('reservationCustomer')
+                ->with('fail', 'Reservation Code Not Found!!');
+        }
+    }
+
 
     public function create()
     {
@@ -209,11 +229,15 @@ class ReservationController extends Controller
     }
 
 
-    public function destroy(Reservation $reservation)
+    public function destroy(Request $request,Reservation $reservation)
     {
         $reservations = Reservation::where('reservation_code', $reservation->reservation_code)->get();
         foreach ($reservations as $r) {
             $r->delete();
+        }
+        if($request->get('customer')){
+            return redirect()->route('reservationCustomer')
+            ->with('success', 'Reservation seccesfully Deleted');
         }
         return redirect()->route('reservation.index')
             ->with('success', 'Reservation seccesfully Deleted');

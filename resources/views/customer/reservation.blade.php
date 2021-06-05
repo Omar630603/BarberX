@@ -17,9 +17,45 @@
 @endsection
 
 @section('content')
+
 <div class="section-header text-center" style="margin-top: 90px;">
     <p>Your Hair is Your Style</p>
     <h2>Make a Reservation and Make Your Hair Trendy!</h2>
+</div>
+<div width = "700px">
+    <center>
+        <div width = "700px">
+            @if ($message = Session::get('fail'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Failed!!</strong><span> {{ $message }}</span>
+            </div>
+            @elseif ($message = Session::get('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!!</strong><span> {{ $message }}</span>
+            </div>
+            @endif
+        </div>
+    </center>
+</div>
+<div class="searchReservation text-center">
+    <div class="titleContainer">
+        <h3>Search For Reservation</h3>
+    </div>
+    <div class="formContainer">
+        <div>
+            <form action="{{route('searchByCustomer')}}" method="post" class  = "searchForm">
+                @csrf
+                <div class="pcoded-search-box d-flex">
+                    <input class = "inputSearch" name="search" type="text" class="mr-3" placeholder="Search">
+                    <span>
+                        <button class = "buttonSearch" class="btn btn-info"><i class="fa fa-search icon-search" style="font-size:24px"></i></button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <div class="formContainer">
     <div class="formReservation">
