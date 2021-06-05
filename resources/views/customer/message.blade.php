@@ -29,26 +29,34 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-8">
                     <div class="contact-form">
-                        <div id="success"></div>
-                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                        <div id="success">
+                            @if ($message = Session::get('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Success!!</strong><span> {{ $message }}</span>
+                            </div>
+                            @endif
+                        </div>
+                        <form action = "{{route('message.store')}}" method = "POST">
+                            @csrf
                             <div class="control-group">
-                                <input type="text" class="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
-                                <p class="help-block text-danger"></p>
+                                <input type="text" class="form-control" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" name = "name" />
+                                <br>
                             </div>
                             <div class="control-group">
-                                <input type="email" class="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
-                                <p class="help-block text-danger"></p>
+                                <input type="email" class="form-control" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" name = "email"/>
+                                <br>
                             </div>
                             <div class="control-group">
-                                <input type="text" class="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
-                                <p class="help-block text-danger"></p>
+                                <input type="text" class="form-control"  placeholder="Title" required="required" data-validation-required-message="Please enter a subject" name = "title"/>
+                                <br>
                             </div>
                             <div class="control-group">
-                                <textarea class="form-control" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
-                                <p class="help-block text-danger"></p>
+                                <textarea class="form-control"  placeholder="Message" required="required" data-validation-required-message="Please enter your message" name = "messagetext"></textarea>
+                                <br>
                             </div>
                             <div>
-                                <button class="btn" type="submit" id="sendMessageButton">Send Message</button>
+                                <button class="btn" type="submit">Send Message</button>
                             </div>
                         </form>
                     </div>

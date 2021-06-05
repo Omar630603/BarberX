@@ -22,7 +22,8 @@ class MessageController extends Controller
     }
 
     public function messageCustomer(){
-        return view('customer.message');
+        $msg = Message::where('show', 1)->get();
+        return view('customer.message', compact('msg'));
     }
 
 
@@ -34,7 +35,22 @@ class MessageController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'title' => 'required',
+            'messagetext' => 'required',
+        ]);
+
+        $msg = New Message;
+        $msg->name = $request->get('name');
+        $msg->email = $request->get('email');
+        $msg->title = $request->get('title');
+        $msg->messagetext = $request->get('messagetext');
+        $msg->save();
+
+        return redirect()->route('messageCustomer')
+            ->with('success', 'Thank You For The Message!!');
     }
 
 

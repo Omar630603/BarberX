@@ -18,8 +18,11 @@ class GalleryController extends Controller
     }
 
     public function galleryCustomer(){
-        $gallery = Gallery::with('categoryService')->get();
-        return view('customer.gallery', compact('gallery'));
+        $hairCut= Gallery::with('categoryService')->where('category_service_id', 1)->get();
+        $colorAndWash= Gallery::with('categoryService')->where('category_service_id', 2)->get();
+        $breadStyle= Gallery::with('categoryService')->where('category_service_id', 3)->get();
+        
+        return view('customer.gallery', compact('hairCut', 'colorAndWash', 'breadStyle'));
     }
 
     
