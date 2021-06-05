@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
-    
+
     public function index()
     {
         $gallery = Gallery::with('categoryService')->get();
@@ -17,21 +17,19 @@ class GalleryController extends Controller
         return view('admin.galleryIndex', compact('gallery', 'categoryService'));
     }
 
-    public function galleryCustomer(){
-        $hairCut= Gallery::with('categoryService')->where('category_service_id', 1)->get();
-        $colorAndWash= Gallery::with('categoryService')->where('category_service_id', 2)->get();
-        $breadStyle= Gallery::with('categoryService')->where('category_service_id', 3)->get();
-        
-        return view('customer.gallery', compact('hairCut', 'colorAndWash', 'breadStyle'));
+    public function galleryCustomer()
+    {
+        $gallery = Gallery::with('categoryService')->get();
+        return view('customer.gallery', compact('gallery'));
     }
 
-    
+
     public function create()
     {
         //
     }
 
-    
+
     public function store(Request $request)
     {
         $request->validate([
@@ -57,13 +55,13 @@ class GalleryController extends Controller
             ->with('success', 'Gallery Successfully Added');
     }
 
-    
+
     public function show(Gallery $gallery)
     {
         //
     }
 
-    
+
     public function edit($idgallery)
     {
         $gallery = Gallery::where('gallery_id', $idgallery)
@@ -72,7 +70,7 @@ class GalleryController extends Controller
         return view('admin.galleryEdit', ['gallery' => $gallery, 'categoryService' => $categoryService]);
     }
 
-    
+
     public function update(Request $request, $idgallery)
     {
         $request->validate([
@@ -102,7 +100,7 @@ class GalleryController extends Controller
             ->with('success', 'Gallery Successfully Updated');
     }
 
-    
+
     public function destroy($idgallery)
     {
         $gallery = Gallery::where('gallery_id', $idgallery)

@@ -34,7 +34,8 @@
             </div>
         </div>
         <div class="row portfolio-container">
-            @foreach($hairCut as $hc)
+            @foreach($gallery as $hc)
+            @if ($hc->categoryService->name == 'Hair Cut')
             <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item hairCut">
                 <div class="portfolio-wrap">
                     <a href="{{asset('storage/'.$hc->image) }}" data-lightbox="portfolio">
@@ -42,8 +43,10 @@
                     </a>
                 </div>
             </div>
+            @endif
             @endforeach
-            @foreach($colorAndWash as $caw)
+            @foreach($gallery as $caw)
+            @if ($caw->categoryService->name == 'Beard Style')
             <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item colorAndWash">
                 <div class="portfolio-wrap">
                     <a href="{{asset('storage/'.$caw->image)}}" data-lightbox="portfolio">
@@ -51,8 +54,10 @@
                     </a>
                 </div>
             </div>
+            @endif
             @endforeach
-            @foreach($breadStyle as $bs)
+            @foreach($gallery as $bs)
+            @if ($bs->categoryService->name == 'Color & Wash')
             <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item breadStyle">
                 <div class="portfolio-wrap">
                     <a href="{{asset('storage/'.$bs->image) }}" data-lightbox="portfolio">
@@ -60,8 +65,8 @@
                     </a>
                 </div>
             </div>
+            @endif
             @endforeach
-            
         </div>
     </div>
 </div>
