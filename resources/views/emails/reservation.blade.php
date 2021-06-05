@@ -1,12 +1,12 @@
 <div class="col-md-6">
     <div class="top-bar-left">
         <div class="text">
-            <h2>8:00 - 9:00</h2>
             <p>Opening Hour Mon - Fri</p>
+            <h2>8:00 - 9:00</h2>
         </div>
         <div class="text">
-            <h2>+123 456 7890</h2>
             <p>Call Us For Appointment</p>
+            <h2>+123 456 7890</h2>
         </div>
     </div>
 </div>
@@ -24,7 +24,7 @@
             <div class="modal-body">
                 <div style="border:2px solid rgba(0,0,0,.125); padding: 10px; border-radius: 10px; margin-bottom: 15px">
                     <h5 class="modal-title" id="exampleModalLongTitle">Customer</h5>
-                    <div style="display: flex; justify-content: space-between">
+                    <div style="display: flex">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Name :{{$r->customer->name}}</li>
                             <li class="list-group-item">E-Mail :{{$r->customer->email}}</li>
@@ -33,20 +33,20 @@
                                 :{{$r->reservation_time}}</li>
                         </ul>
                         <img class="float-right my-2" width="170px" height="170px" style="border-radius: 10%"
-                            src="{{asset('storage/'.$r->customer->image)}}">
+                            src="{{$message->embed(storage_path('app/public/'.$r->customer->image))}}">
                     </div>
                 </div>
                 <div style="border:2px solid rgba(0,0,0,.125); padding: 10px; border-radius: 10px; margin-bottom: 15px">
                     <h5 class="modal-title" id="exampleModalLongTitle">Services</h5>
                     <div>
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush" style="display: flex;">
                             @foreach ($reservationServices as $rS)
                             @if ($r->reservation_code == $rS->reservation_code)
-                            <li style="display: flex; justify-content: space-between" class="list-group-item">
+                            <li class="list-group-item">
                                 Service: {{$rS->service->name}}<br>
-                                Price: {{$rS->service->price}}
-                                <img width="50px" height="50px" style="border-radius: 10%"
-                                    src="{{asset('storage/'.$rS->service->image)}}"></li>
+                                Price: {{$rS->service->price}}</li>
+                            <img width="50px" height="50px" style="border-radius: 10%"
+                                src="{{$message->embed(storage_path('app/public/'.$rS->service->image))}}">
                             @endif
                             @endforeach
                         </ul>
