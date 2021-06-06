@@ -18,7 +18,23 @@
 
 
 @section('content')
-
+<div width="700px">
+	<center>
+		<div width="700px">
+			@if ($message = Session::get('fail'))
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Failed!!</strong><span> {{ $message }}</span>
+			</div>
+			@elseif ($message = Session::get('success'))
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Success!!</strong><span> {{ $message }}</span>
+			</div>
+			@endif
+		</div>
+	</center>
+</div>
 <div class="" id="reservation{{$r->reservation_id}}" tabindex="-1" role="dialog"
 	aria-labelledby="reservation{{$r->reservation_id}}" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -87,8 +103,8 @@
 </div>
 
 {{-- MODAL --}}
-<div class="modal fade" id="reservationEditForm" tabindex="-1" role="dialog"
-	aria-labelledby="reservation{{$r->reservation_id}}" aria-hidden="true">
+<div class="modal fade" id="reservationEditForm" tabindex="-1" role="dialog" aria-labelledby="reservationEditForm"
+	aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -100,75 +116,92 @@
 			</div>
 			<div class="modal-body">
 				<div style="text-align: center">
-					<h3 class="main-title">Add New Reservation</h3>
+					<h3 class="main-title" style="margin-top: 0">Edit Your Reservation</h3>
 				</div>
-				<div class="content-form">
-					<form method="post" action="{{ route('reservation.store') }}" id="myForm" enctype="multipart/form-data">
+				<div class="content-form" style="padding: 0px 40px;">
+					<form method="POST"
+						action="{{ route('reservation.updateByCustomer', ['reservation'=>$r, 'customer'=>$r->customer]) }}"
+						id="myForm" enctype="multipart/form-data">
 						@csrf
+						@method('PUT')
 						<h4 class="sub-title">Customer Bio</h4>
-						<div class="form-group row">
-							<label for="name" class="col-sm-3 col-form-label">Customer Name</label>
-							<div class="col-sm-9">
-								<input type="text" class="form-control" id="name" placeholder="Enter Customer Name" name="name">
-							</div>
+						<div class="form-group">
+							<label for="name" class="col-form-label">Customer Name</label>
+							<input type="text" class="form-control" id="name" placeholder="Enter Customer Name"
+								name="name" value="{{$r->customer->name}}">
 						</div>
-						<div class="form-group row">
-							<label for="email" class="col-sm-3 col-form-label">E-mail</label>
-							<div class="col-sm-9">
-								<input type="email" class="form-control" id="email" placeholder="Enter E-mail" name="email">
-							</div>
+						<div class="form-group">
+							<label for="email" class="col-form-label">E-mail</label>
+							<input type="email" class="form-control" id="email" placeholder="Enter E-mail" name="email"
+								value="{{$r->customer->email}}">
 						</div>
-						<div class="form-group row">
-							<label for="phone" class="col-sm-3 col-form-label">Phone</label>
-							<div class="col-sm-9">
-								<input type="text" class="form-control" id="phone" placeholder="Enter Phone" name="phone">
-							</div>
+						<div class="form-group">
+							<label for="phone" class="col-form-label">Phone</label>
+							<input type="text" class="form-control" id="phone" placeholder="Enter Phone" name="phone"
+								value="{{$r->customer->phone}}">
 						</div>
-						<div class="form-group row">
-							<label class="col-sm-3 col-form-label" for="image">Photo</label>
-							<div class="col-sm-9">
-								<button onclick="$('#image').click(); return false;" class="btn btn-sm btn-dark buttonAddPhoto">Add
-									Photo</button>
-								<input style="display:none" disabled type="text" class="form-control" id="photoCustomer"
-									placeholder="Click Add Photo to Add Photo" name="phone">
-								<input type="file" style="display:none" class="form-control" id="image" placeholder="Upload Image" name="image">
-							</div>
+						<img class="float-right" width="170px" height="170px" style="border-radius: 10%"
+							src="{{asset('storage/'.$r->customer->image)}}">
+						<div class="form-group">
+							<label class="col-form-label" for="image">Photo</label><br>
+							<button style="float: none" onclick="$('#image').click(); return false;"
+								class="btn btn-sm btn-dark buttonAddPhoto">Change
+								Photo</button>
+							<input style="display:none" disabled type="text" class="form-control" id="photoCustomer"
+								placeholder="Click Add Photo to Add Photo" name="PhotoName">
+							<input type="file" style="display:none" class="form-control" id="image"
+								placeholder="Upload Image" name="image" value="{{$r->customer->image}}">
+						</div>
+						<div class="form-group row" style="margin-top: 20px">
+							<label for="reservation_time" class="col-form-label">Reservation Time</label>
+							<input type="datetime-local" class="form-control" id="reservation_time"
+								placeholder="Enter Reservation Time" name="reservation_time">
+							<p>Your Reservation Time:{{$r->reservation_time}}</p>
 						</div>
 						<h4 class="sub-title">Service</h4>
 						<div class="form-group row">
-							<label for="service_id" class="col-sm-3 col-form-label">Service</label>
-							<div class="col-sm-9">
-								<div class="checkboxContainer">
-									@foreach($service as $s)
-									<div class="serviceBiggerBox" style="display: flex">
-										<input type="checkbox" id="service{{$s->service_id}}" class="checkboxService" name="service_id[]"
-											value="{{$s->service_id}}">
-										<div class="col-lg-3 col-md-5 col-sm-6">
-											<div class="serviceBox">
-												<div class="">
-													<img src="{{asset('storage/'.$s->image) }}" alt="Image" width="50px">
-												</div>
-												<div class="labelService">
-													<h2 class="serviceName">{{$s->name}}</h2>
-													<h3 class="servicePrice">R{{$s->price}}</h3>
-												</div>
+							<label for="service_id" class="col-form-label">Service</label>
+							<div class="checkboxContainer">
+								@foreach($service as $s)
+								@if(in_array($s->service_id, $servicesReservation))
+								<div class="serviceBiggerBox" style="display: flex">
+									<input type="checkbox" id="service{{$s->service_id}}" class="checkboxService"
+										name="service_id[]" value="{{$s->service_id}}" checked>
+									<div class="col-lg-3 col-md-5 col-sm-6">
+										<div class="serviceBox">
+											<div class="">
+												<img src="{{asset('storage/'.$s->image) }}" alt="Image" width="50px">
+											</div>
+											<div class="labelService">
+												<h2 class="serviceName">{{$s->name}}</h2>
+												<h3 class="servicePrice">R{{$s->price}}</h3>
 											</div>
 										</div>
 									</div>
-									@endforeach
 								</div>
+								@else
+								<div class="serviceBiggerBox" style="display: flex">
+									<input type="checkbox" id="service{{$s->service_id}}" class="checkboxService"
+										name="service_id[]" value="{{$s->service_id}}">
+									<div class="col-lg-3 col-md-5 col-sm-6">
+										<div class="serviceBox">
+											<div class="">
+												<img src="{{asset('storage/'.$s->image) }}" alt="Image" width="50px">
+											</div>
+											<div class="labelService">
+												<h2 class="serviceName">{{$s->name}}</h2>
+												<h3 class="servicePrice">R{{$s->price}}</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+								@endif
+								@endforeach
 							</div>
 						</div>
-						<div class="form-group row">
-							<label for="reservation_time" class="col-sm-3 col-form-label">Reservation Time</label>
-							<div class="col-sm-9">
-								<input type="datetime-local" class="form-control" id="reservation_time" placeholder="Enter Reservation Time"
-									name="reservation_time">
-							</div>
-						</div>
-						<input type="text" name="customer" value="1" style="display: none">
+						<input name="search" type="text" style="display: none" value="{{$r->reservation_code}}">
 						<div>
-							<button type="submit" class="btn-reservation">Reserve</button>
+							<button type="submit" class="btn-reservation">Change</button>
 						</div>
 					</form>
 				</div>
@@ -177,18 +210,34 @@
 	</div>
 </div>
 
-<div class = "buttonContainer" style="display: flex; justify-content: center">
-		<a data-target = "#reservationEditForm" data-toggle = "modal" type="button" class = " button-edit">
-			Edit Reservation
-		</a>
-		<form action="{{ route('reservation.destroy', $r) }}" method="POST">
+<div class="buttonContainer" style="display: flex; justify-content: center">
+	<button data-target="#reservationEditForm" data-toggle="modal" type="button" class=" button-edit">
+		Edit Reservation
+	</button>
+	<form action="{{ route('reservation.destroy', $r) }}" method="POST">
 		@csrf
 		@method('DELETE')
-			<input type="hidden" name="customer" value = "1" id="">
-			<button class = " button-delete" >
-				Delete Reservation
-			</button>
+		<input type="hidden" name="customer" value="1" id="">
+		<button class=" button-delete">
+			Delete Reservation
+		</button>
+	</form>
+	<form action="{{ route('reservation.email', $r) }}" method="POST">
+		@csrf
+		<button class=" button-email">
+			Send to my Email
+		</button>
 	</form>
 </div>
-
+<script>
+	+ function($) {
+    'use strict';
+    var inputImage = document.getElementById('image');
+    var p = document.getElementById('photoCustomer');
+    inputImage.onchange = function() {
+        p.style.display = '';
+        p.value = inputImage.files[0].name;
+    }
+    }(jQuery);
+</script>
 @endsection

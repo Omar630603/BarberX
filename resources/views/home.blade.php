@@ -269,15 +269,12 @@
                 <h2 style="color: #fff">There are no Messages to show</h2>
                 </center>
                 @else
-
                 @foreach ($msg as $m)
-                @if ($m->show)
                 <div class="testimonial-item">
                     <h3>{{$m->name}}</h3>
                     <h2>{{$m->title}}</h2>
                     <p>{{$m->messagetext}}</p>
                 </div>
-                @endif
                 @endforeach
                 @endif
         </div>

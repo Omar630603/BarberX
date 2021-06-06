@@ -93,6 +93,7 @@ Route::get('/service/all/customer', [ServiceController::class, 'serviceCustomer'
 Route::get('/employee/all/customer', [EmployeeController::class, 'employeeCustomer'])->name('employeeCustomer');
 Route::get('/gallery/all/customer', [GalleryController::class, 'galleryCustomer'])->name('galleryCustomer');
 Route::get('/reservation/all/customer', [reservationController::class, 'reservationCustomer'])->name('reservationCustomer');
-Route::post('/reservation/search/customer', [reservationController::class, 'searchByCustomer'])->name('searchByCustomer');
+Route::get('/reservation/search/customer', [reservationController::class, 'searchByCustomer'])->name('searchByCustomer');
 Route::get('/message/all/customer', [messageController::class, 'messageCustomer'])->name('messageCustomer');
-
+Route::put('/reservation/editReservation/{reservation}/{customer}', [reservationController::class, 'updateByCustomer'])->name('reservation.updateByCustomer');
+Route::post('/reservation/sendReservation/{reservation}}', [reservationController::class, 'sendtoCustomer'])->name('reservation.email');

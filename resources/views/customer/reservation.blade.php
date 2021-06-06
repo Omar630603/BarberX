@@ -22,9 +22,9 @@
     <p>Your Hair is Your Style</p>
     <h2>Make a Reservation and Make Your Hair Trendy!</h2>
 </div>
-<div width = "700px">
+<div width="700px">
     <center>
-        <div width = "700px">
+        <div width="700px">
             @if ($message = Session::get('fail'))
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -45,12 +45,13 @@
     </div>
     <div class="formContainer">
         <div>
-            <form action="{{route('searchByCustomer')}}" method="post" class  = "searchForm">
+            <form action="{{route('searchByCustomer')}}" method="get" class="searchForm">
                 @csrf
                 <div class="pcoded-search-box d-flex">
-                    <input class = "inputSearch" name="search" type="text" class="mr-3" placeholder="Search">
+                    <input class="inputSearch" name="search" type="text" class="mr-3" placeholder="Search">
                     <span>
-                        <button class = "buttonSearch" class="btn btn-info"><i class="fa fa-search icon-search" style="font-size:24px"></i></button>
+                        <button class="buttonSearch" class="btn btn-info"><i class="fa fa-search icon-search"
+                                style="font-size:24px"></i></button>
                     </span>
                 </div>
             </form>
@@ -90,7 +91,7 @@
                         <button onclick="$('#image').click(); return false;"
                             class="btn btn-sm btn-dark buttonAddPhoto">Add Photo</button>
                         <input style="display:none" disabled type="text" class="form-control" id="photoCustomer"
-                            placeholder="Click Add Photo to Add Photo" name="phone">
+                            placeholder="Click Add Photo to Add Photo" name="photoName">
                         <input type="file" style="display:none" class="form-control" id="image"
                             placeholder="Upload Image" name="image">
                     </div>

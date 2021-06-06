@@ -177,7 +177,7 @@ class UserController extends Controller
     }
     public function indexCustomer()
     {
-        $msg = Message::all();
+        $msg = Message::where('show', 1)->get();
         return view('home', compact('msg'));
     }
 }
