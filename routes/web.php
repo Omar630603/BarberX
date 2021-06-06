@@ -41,7 +41,7 @@ Route::get('/register', function () {
 });
 Route::get('/admin/index', function () {
     if (Auth::check()) {
-        return view('admin.profile');
+        return redirect()->route('reservation.index');
     }
     return redirect()->route('login');
 });

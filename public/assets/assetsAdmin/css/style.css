@@ -18718,8 +18718,9 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
  ========================================= */
 .common-img-bg {
     background-size: cover;
-    background: url(../images/bg.jpg) no-repeat center center fixed;
-    height: 100%;
+    background: url("/assets/assetsAdmin/images/background.jpg") no-repeat center fixed;
+    height: 100;
+    ;
 }
 
 .signin-card .auth-box button i,
@@ -23785,3 +23786,4 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
     font-weight: bold;
     color: #8f6bf1;
 }
+
