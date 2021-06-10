@@ -111,7 +111,7 @@
                         <tr>
                             <th scope="row">{{$no++}}</th>
                             <td>{{$cs->name}}</td>
-                            <td><img width="50px" height="50px" src="{{asset('storage/'.$cs->image) }}"></td>
+                            <td><img width="70px" height="50px" src="{{asset('storage/'.$cs->image) }}"></td>
                             <td style="display: flex">
                                 <a type="button" class="btn btn-warning"
                                     href="{{ route('categoryService.edit', $cs->category_service_id) }}"><i

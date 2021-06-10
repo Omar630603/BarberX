@@ -18,7 +18,7 @@ class CreateEmployeeTable extends Migration
             $table->string('name');
             $table->string('skill');
             $table->string('description');
-            $table->string('image')->nullable();
+            $table->string('image')->default('images/employeeDefault.jpg');
             $table->timestamps();
         });
     }

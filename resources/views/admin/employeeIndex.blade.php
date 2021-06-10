@@ -124,7 +124,7 @@
                         <td>{{$e->name}}</td>
                         <td>{{$e->skill}}</td>
                         <td>{{$e->description}}</td>
-                        <td><img width="50px" height="50px" src="{{asset('storage/'.$e->image) }}"></td>
+                        <td><img width="45px" height="50px" src="{{asset('storage/'.$e->image) }}"></td>
                         <td style="display: flex">
                             <a type="button" class="btn btn-warning"
                                 href="{{ route('employee.edit', $e->employee_id) }}"><i class="ti-marker-alt"></i></a>

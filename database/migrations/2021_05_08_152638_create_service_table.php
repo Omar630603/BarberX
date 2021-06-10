@@ -19,7 +19,7 @@ class CreateServiceTable extends Migration
             $table->foreign('category_service_id')->references('category_service_id')->on('category_service')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
             $table->integer('price');
-            $table->string('image')->nullable();
+            $table->string('image')->default('images/serviceDefault.jpg');
             $table->timestamps();
         });
     }

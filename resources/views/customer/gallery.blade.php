@@ -46,7 +46,7 @@
             @endif
             @endforeach
             @foreach($gallery as $caw)
-            @if ($caw->categoryService->name == 'Beard Style')
+            @if ($caw->categoryService->name == 'Color & Wash')
             <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item colorAndWash">
                 <div class="portfolio-wrap">
                     <a href="{{asset('storage/'.$caw->image)}}" data-lightbox="portfolio">
@@ -57,7 +57,7 @@
             @endif
             @endforeach
             @foreach($gallery as $bs)
-            @if ($bs->categoryService->name == 'Color & Wash')
+            @if ($bs->categoryService->name == 'Bread Style')
             <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item breadStyle">
                 <div class="portfolio-wrap">
                     <a href="{{asset('storage/'.$bs->image) }}" data-lightbox="portfolio">

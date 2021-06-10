@@ -16,7 +16,7 @@ class CreateCategoryServiceTable extends Migration
         Schema::create('category_service', function (Blueprint $table) {
             $table->id('category_service_id');
             $table->string('name');
-            $table->string('image')->nullable();
+            $table->string('image')->default('images/serviceCategoryDefault.jpg');
             $table->timestamps();
         });
     }

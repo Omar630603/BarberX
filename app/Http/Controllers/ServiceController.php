@@ -41,18 +41,17 @@ class ServiceController extends Controller
             'name' => 'required',
             'category_service_id' => 'required',
             'price' => 'required',
-            'image' => 'required',
+            'image' => 'nullable',
         ]);
 
+        $service = new Service;
         if ($request->file('image')) {
             $image = $request->file('image')->store('images', 'public');
+            $service->image = $image;
         }
 
-        $service = new Service;
         $service->name = $request->get('name');
         $service->price = $request->get('price');
-        $service->image = $image;
-
         $categoryService = new CategoryService;
         $categoryService->category_service_id = $request->get('category_service_id');
 
@@ -93,7 +92,9 @@ class ServiceController extends Controller
 
         if ($request->file('image')) {
             if ($service->image && file_exists(storage_path('app/public/' . $service->image))) {
+                 if($service->image !== 'images/serviceDefault.jpg'){
                 Storage::delete('public/' . $service->image);
+                 }
                 $image = $request->file('image')->store('images', 'public');
                 $service->image = $image;
             }
@@ -117,7 +118,9 @@ class ServiceController extends Controller
     public function destroy($idservice)
     {
         $service = Service::where('service_id', $idservice)->first();
+        if($service->image !== 'images/serviceDefault.jpg'){
         Storage::delete('public/' . $service->image);
+        }
         $service->delete();
         return redirect()->route('service.index')
             ->with('success', 'Service seccesfully Deleted');

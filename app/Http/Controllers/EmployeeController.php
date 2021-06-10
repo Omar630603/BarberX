@@ -37,18 +37,18 @@ class EmployeeController extends Controller
             'name' => 'required',
             'skill' => 'required',
             'description' => 'required',
-            'image' => 'required',
+            'image' => 'nullable',
         ]);
 
+        $employee = new Employee;
         if ($request->file('image')) {
             $image = $request->file('image')->store('images', 'public');
+            $employee->image = $image;
         }
 
-        $employee = new Employee;
         $employee->name = $request->get('name');
         $employee->skill = $request->get('skill');
         $employee->description = $request->get('description');
-        $employee->image = $image;
 
         $employee->save();
 
@@ -86,7 +86,9 @@ class EmployeeController extends Controller
 
         if ($request->file('image')) {
             if ($employee->image && file_exists(storage_path('app/public/' . $employee->image))) {
+                if($employee->image !== 'images/employeeDefault.jpg'){
                 Storage::delete('public/' . $employee->image);
+                }
                 $image = $request->file('image')->store('images', 'public');
                 $employee->image = $image;
             }
@@ -108,7 +110,9 @@ class EmployeeController extends Controller
     {
         $employee = Employee::where('employee_id', $idemployee)
             ->first();
+        if($employee->image !== 'images/employeeDefault.jpg'){
         Storage::delete('public/' . $employee->image);
+        }
         $employee->delete();
         return redirect()->route('employee.index')
             ->with('success', 'Employee seccesfully Deleted');
