@@ -13,7 +13,7 @@ class serviceCategorySeeder extends Seeder
         $serviceCategories = [
             ['name' => 'Hair Cut'],
             ['name' => 'Color & Wash'],
-            ['name' => 'Bread Style'],
+            ['name' => 'Beard Style'],
         ];
 
         CategoryService::insert($serviceCategories);

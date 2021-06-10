@@ -49,7 +49,7 @@
                         <label for="image">Photo</label>
                         <input type="file" name="image" class="form-control" id="foto_unit"
                             value="{{$categoryService->image}}" aria-describedby="image">
-                        <img width="100px" height="100px" class="mt-2"
+                        <img width="150px" height="100px" class="mt-2"
                             src="{{asset('storage/'.$categoryService->image) }}">
                     </div>
                     <a type="button" class="btn btn-primary btn-outline-primary"

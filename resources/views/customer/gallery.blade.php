@@ -57,7 +57,7 @@
             @endif
             @endforeach
             @foreach($gallery as $bs)
-            @if ($bs->categoryService->name == 'Bread Style')
+            @if ($bs->categoryService->name == 'Beard Style')
             <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item breadStyle">
                 <div class="portfolio-wrap">
                     <a href="{{asset('storage/'.$bs->image) }}" data-lightbox="portfolio">

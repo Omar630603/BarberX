@@ -101,6 +101,7 @@
                                         <div style="margin-top: 5px; margin-left: 10px">
                                             <button type="submit" class="btn btn-sm btn-primary"><i
                                                     class="ti-check"></i></button>
+                                                    <a href="" onclick="$('#editMessage{{$m->message_id}}').hide(); $('#message{{$m->message_id}}').show(); return false; " class = "btn btn-sm">&times;</a>
                                         </div>
                                     </form>
                                 </div>

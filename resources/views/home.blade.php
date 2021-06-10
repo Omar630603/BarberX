@@ -9,7 +9,7 @@
                 <div class="hero-text">
                     <h1>Trusted Barbershop</h1>
                     <p>
-                        Make every hair we cut more trendy and of course represent you!
+                        It's 2021 Bro, don't forget to trim your hair to make it trendy!
                     </p>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="price-text">
                         <h2>{{$s->name}}</h2>
-                        <h3>{{$s->price}}</h3>
+                        <h3>Rp.{{$s->price}}</h3>
                     </div>
                 </div>
             </div>

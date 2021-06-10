@@ -53,7 +53,7 @@
                 </ul>
             </div>
             @endif
-            <h4 class="mb-3">New Service</h4>
+            <h4 class="mb-3">New Galleri</h4>
             <form method="post" action="{{ route('gallery.store') }}" id="myForm" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group row">

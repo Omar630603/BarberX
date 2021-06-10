@@ -92,6 +92,7 @@
                                     </select>
                                     <div style="margin-top: 5px; margin-left: 10px">
                                         <button type="submit" class="btn btn-primary">Done</button>
+                                        <a href="" class="btn btn-sm" onclick = "$('#editStatus{{$rs->reservation_status_id}}').hide(); $('#status{{$rs->reservation_status_id}}').show(); return false; ">&times;</a>
                                     </div>
                                 </form>
                             </div>
