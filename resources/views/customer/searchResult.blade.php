@@ -106,17 +106,17 @@
 <div class="modal fade" id="reservationEditForm" tabindex="-1" role="dialog" aria-labelledby="reservationEditForm"
 	aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
+		<div class="modal-content" >
+			<div class="modal-header" style = "background: #d5b981">
 				<div>
 					<h5 class="modal-title" id="exampleModalLongTitle">Detail
 						{{$r->customer->name}}'s Reservation</h5>
 					<h6 class="mt-3">Code Reservation: <b>{{$r->reservation_code}}</b></h6>
 				</div>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body" style = "background: #1d2434">
 				<div style="text-align: center">
-					<h3 class="main-title" style="margin-top: 0">Edit Your Reservation</h3>
+					<h4 class="main-title" style="margin-top: 0">Edit Your Reservation</h4>
 				</div>
 				<div class="content-form" style="padding: 0px 40px;">
 					<form method="POST"
@@ -124,23 +124,25 @@
 						id="myForm" enctype="multipart/form-data">
 						@csrf
 						@method('PUT')
-						<h4 class="sub-title">Customer Bio</h4>
-						<div class="form-group">
-							<label for="name" class="col-form-label">Customer Name</label>
-							<input type="text" class="form-control" id="name" placeholder="Enter Customer Name"
-								name="name" value="{{$r->customer->name}}">
+						<h5 class="sub-title">Customer Bio</h5>
+						<div class="d-flex" style="gap: 10px; width: 900px" >
+							<div class="form-group">
+								<label for="name" class="col-form-label">Customer Name</label>
+								<input type="text" class="form-control" id="name" placeholder="Enter Customer Name"
+									name="name" value="{{$r->customer->name}}">
+							</div>
+							<div class="form-group">
+								<label for="email" class="col-form-label">E-mail</label>
+								<input type="email" class="form-control" id="email" placeholder="Enter E-mail" name="email"
+									value="{{$r->customer->email}}">
+							</div>
+							<div class="form-group">
+								<label for="phone" class="col-form-label">Phone</label>
+								<input type="text" class="form-control" id="phone" placeholder="Enter Phone" name="phone"
+									value="{{$r->customer->phone}}">
+							</div>
 						</div>
-						<div class="form-group">
-							<label for="email" class="col-form-label">E-mail</label>
-							<input type="email" class="form-control" id="email" placeholder="Enter E-mail" name="email"
-								value="{{$r->customer->email}}">
-						</div>
-						<div class="form-group">
-							<label for="phone" class="col-form-label">Phone</label>
-							<input type="text" class="form-control" id="phone" placeholder="Enter Phone" name="phone"
-								value="{{$r->customer->phone}}">
-						</div>
-						<img class="float-right" width="170px" height="170px" style="border-radius: 10%"
+						<img class="float-right" width="100px" height="100px" style="border-radius: 10%"
 							src="{{asset('storage/'.$r->customer->image)}}">
 						<div class="form-group">
 							<label class="col-form-label" for="image">Photo</label><br>
@@ -150,15 +152,15 @@
 							<input style="display:none" disabled type="text" class="form-control" id="photoCustomer"
 								placeholder="Click Add Photo to Add Photo" name="PhotoName">
 							<input type="file" style="display:none" class="form-control" id="image"
-								placeholder="Upload Image" name="image" value="{{$r->customer->image}}">
+								placeholder="Upload Image" name="image" style="width: 70px !important" value="{{$r->customer->image}}">
 						</div>
 						<div class="form-group row" style="margin-top: 20px">
 							<label for="reservation_time" class="col-form-label">Reservation Time</label>
 							<input type="datetime-local" class="form-control" id="reservation_time"
 								placeholder="Enter Reservation Time" name="reservation_time">
-							<p>Your Reservation Time:{{$r->reservation_time}}</p>
+							<p style="color: rgb(207, 207, 207); margin-top: 5px">Your Reservation Time: {{$r->reservation_time}}</p>
 						</div>
-						<h4 class="sub-title">Service</h4>
+						<h5 class="sub-title">Service</h5>
 						<div class="form-group">
 							<label for="service_id" class="col-form-label">Service</label>
 							<div class="checkboxContainer">
