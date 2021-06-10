@@ -18717,10 +18717,11 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
       Authentication-page css start
  ========================================= */
 .common-img-bg {
-    background-size: cover;
-    background: url("/assets/assetsAdmin/images/background.jpg") no-repeat center fixed;
-    height: 100;
-    ;
+    background: url("/assets/assetsAdmin/images/background.jpg") no-repeat
+        center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
 
 .signin-card .auth-box button i,
@@ -23745,8 +23746,7 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
     white-space: -pre-wrap;
 }
 
-
-.fc-prev-button{
+.fc-prev-button {
     background: #00aced;
     border: none;
     color: white;
@@ -23758,7 +23758,7 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
     color: white;
 }
 
-.fc{
+.fc {
     width: 100%;
 }
 
@@ -23767,23 +23767,22 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
     color: white;
 }
 
-.fc-left{
+.fc-left {
     color: rgb(75, 138, 211);
 }
 
-.title-profile{
+.title-profile {
     color: #0275d8;
     font-size: 16px;
     font-weight: bolder;
 }
 
-.content-profile{
+.content-profile {
     font-size: 15px;
 }
 
-.main-title{
+.main-title {
     font-size: 25px;
     font-weight: bold;
     color: #8f6bf1;
 }
-

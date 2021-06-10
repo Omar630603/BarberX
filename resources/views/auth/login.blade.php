@@ -83,11 +83,12 @@
             <div class="row">
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
-                    <div class="login-card card-block auth-body mr-auto ml-auto" >
+                    <div class="login-card card-block auth-body mr-auto ml-auto">
                         <div class="md-float-material">
                             <div class="auth-box" style="background: #1d2434">
                                 <div class="text-center" width="400px">
-                                    <img src="{{asset('assets/assetsAdmin/images/logo.png')}}" width="150px" alt="logo.png">
+                                    <img src="{{asset('assets/assetsAdmin/images/logo.png')}}" width="150px"
+                                        alt="logo.png">
                                 </div>
                                 <div class="row m-b-10">
                                     <div class="col-md-12">
@@ -95,22 +96,26 @@
                                     </div>
                                 </div>
                                 <hr style="background: rgb(70, 70, 70)">
-                                <form action="{{route('login')}}" method = "POST" class = "mt-4">
+                                <form action="{{route('login')}}" method="POST" class="mt-4">
                                     @csrf
                                     <div class="input-group">
-                                        <input type="email" name = "email" class="form-control" placeholder="Your Email Address" style="background: #1d2434; border: none; border-bottom: 1px solid #d5b981;">
+                                        <input type="email" name="email" class="form-control"
+                                            placeholder="Your Email Address"
+                                            style="background: #1d2434; border: none; border-bottom: 1px solid #d5b981;">
                                         <span class="md-line"></span>
                                     </div>
                                     <div class="input-group">
-                                        <input type="password" name = "password" class="form-control" placeholder="Password" style="background: #1d2434; border: none; border-bottom: 1px solid #d5b981;">
+                                        <input type="password" name="password" class="form-control"
+                                            placeholder="Password"
+                                            style="background: #1d2434; border: none; border-bottom: 1px solid #d5b981;">
                                         <span class="md-line"></span>
                                     </div>
                                     <div class="row m-t-25 text-left">
                                         <div class="col-sm-7 col-xs-12">
                                             <div class="checkbox-fade fade-in-dark">
                                                 <input type="checkbox" value="" style="">
-                                                <label style="color: #d5b981"> 
-                                                    <span class="" >Remember me</span>
+                                                <label style="color: #d5b981">
+                                                    <span class="">Remember me</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -119,43 +124,46 @@
                                                 Forgot Your Password?</a>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-block waves-effect text-center m-b-20 m-t-30 button-login" style="background: #d5b981; color: #1d2434; border: none; font-weight: bolder;">Log in</button>
+                                    <button type="submit"
+                                        class="btn btn-block waves-effect text-center m-b-20 m-t-30 button-login"
+                                        style="background: #d5b981; color: #1d2434; border: none; font-weight: bolder;">Log
+                                        in</button>
                                 </form>
-                               
+
                             </div>
-                        </form>
-                        <!-- end of form -->
+                            </form>
+                            <!-- end of form -->
+                        </div>
+                        <!-- Authentication card end -->
                     </div>
-                    <!-- Authentication card end -->
+                    <!-- end of col-sm-12 -->
                 </div>
-                <!-- end of col-sm-12 -->
+                <!-- end of row -->
             </div>
-            <!-- end of row -->
-        </div>
-        <!-- end of container-fluid -->
+            <!-- end of container-fluid -->
     </section>
 
-<script type="text/javascript" src="{{asset('assets/assetsAdmin/js/jquery/jquery.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/assetsAdmin/js/jquery-ui/jquery-ui.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/assetsAdmin/js/popper.js/popper.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/assetsAdmin/js/bootstrap/js/bootstrap.min.js')}}"></script>
-<!-- jquery slimscroll js -->
-<script type="text/javascript" src="{{asset('assets/assetsAdmin/js/jquery-slimscroll/jquery.slimscroll.js')}}">
-</script>
-<!-- modernizr js -->
-<script type="text/javascript" src="{{asset('assets/assetsAdmin/js/modernizr/modernizr.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/assetsAdmin/js/modernizr/css-scrollbars.js')}}"></script>
-{{-- FullCalendar --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<!-- classie js -->
-<script type="text/javascript" src="{{asset('assets/assetsAdmin/js/classie/classie.js')}}"></script>
-<!-- Custom js -->
-<script type="text/javascript" src="{{asset('assets/assetsAdmin/js/script.js')}}"></script>
-<script src="{{asset('assets/assetsAdmin/js/pcoded.min.js')}}"></script>
-<script src="{{asset('assets/assetsAdmin/js/demo-12.js')}}"></script>
-<script src="{{asset('assets/assetsAdmin/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/jquery/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/jquery-ui/jquery-ui.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/popper.js/popper.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/bootstrap/js/bootstrap.min.js')}}"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/jquery-slimscroll/jquery.slimscroll.js')}}">
+    </script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/modernizr/modernizr.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/modernizr/css-scrollbars.js')}}"></script>
+    {{-- FullCalendar --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- classie js -->
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/classie/classie.js')}}"></script>
+    <!-- Custom js -->
+    <script type="text/javascript" src="{{asset('assets/assetsAdmin/js/script.js')}}"></script>
+    <script src="{{asset('assets/assetsAdmin/js/pcoded.min.js')}}"></script>
+    <script src="{{asset('assets/assetsAdmin/js/demo-12.js')}}"></script>
+    <script src="{{asset('assets/assetsAdmin/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
 </body>
 
 </html>
