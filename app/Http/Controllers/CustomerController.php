@@ -8,11 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index(Request $request)
     {
         $search = $request->get('search');
@@ -24,22 +20,13 @@ class CustomerController extends Controller
         return view('admin.customerIndex', compact('customers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -61,35 +48,19 @@ class CustomerController extends Controller
             ->with('success', 'New Customer Added Succesfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show(Customer $customer)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(Customer $customer)
     {
         return view('admin.customerEdit', ['customer' => $customer]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, Customer $customer)
     {
         $request->validate([
@@ -116,12 +87,7 @@ class CustomerController extends Controller
             ->with('success', 'Customer seccesfully Updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Customer $customer)
     {
         Storage::delete('public/' . $customer->image);
