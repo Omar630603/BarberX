@@ -159,7 +159,7 @@
 							<p>Your Reservation Time:{{$r->reservation_time}}</p>
 						</div>
 						<h4 class="sub-title">Service</h4>
-						<div class="form-group row">
+						<div class="form-group">
 							<label for="service_id" class="col-form-label">Service</label>
 							<div class="checkboxContainer">
 								@foreach($service as $s)

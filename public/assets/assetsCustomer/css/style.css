@@ -1392,10 +1392,18 @@ a:focus {
     color: #d5b981;
 }
 
+.formContainer{
+    background: #1d2434;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
 .formReservation {
     display: block;
     align-items: center;
     background: #1d2434;
+    width: 1000px;
 }
 .main-title {
     font-weight: bold;
@@ -1507,11 +1515,13 @@ a:focus {
     color: #1d2434;
 }
 
-.formContainer {
+.searchContainer {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+
 
 .inputSearch {
     width: 800px;

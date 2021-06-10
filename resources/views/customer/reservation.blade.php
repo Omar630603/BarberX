@@ -43,7 +43,7 @@
     <div class="titleContainer">
         <h3>Search For Reservation</h3>
     </div>
-    <div class="formContainer">
+    <div class="searchContainer">
         <div>
             <form action="{{route('searchByCustomer')}}" method="get" class="searchForm">
                 @csrf
@@ -63,6 +63,17 @@
         <div style="text-align: center">
             <h3 class="main-title">Add New Reservation</h3>
         </div>
+        @if ($message = Session::get('failr'))
+        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Failed!!</strong><span> {{ $message }}</span>
+        </div>
+        @elseif ($message = Session::get('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!!</strong><span> {{ $message }}</span>
+        </div>
+        @endif
         <div class="content-form">
             <form method="post" action="{{ route('reservation.store') }}" id="myForm" enctype="multipart/form-data">
                 @csrf

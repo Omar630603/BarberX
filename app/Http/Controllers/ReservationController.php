@@ -68,8 +68,14 @@ class ReservationController extends Controller
     {
         $service_id = $request->get('service_id');
         if (empty($service_id)) {
-            return redirect()->route('reservation.index')
-                ->with('fail', 'Cheack the service');
+            if ($request->get('customer')) {
+                return redirect()->route('reservationCustomer')
+                ->with('failr', 'Check the service');
+            }
+            else{
+                return redirect()->route('reservation.index')
+                ->with('fail', 'Check the service');
+            }
         } else {
             $request->validate([
                 'name' => 'required',
@@ -115,6 +121,7 @@ class ReservationController extends Controller
                 Mail::to($reservation->customer->email)->send(new MailReservation($r, $reservationServices, $reservationStatus));
                 return view('customer.reservationDetail', compact('r', 'reservationStatus', 'reservationServices'));
             }
+
             Mail::to($reservation->customer->email)->send(new MailReservation($r, $reservationServices, $reservationStatus));
             return redirect()->route('reservation.index')
                 ->with('success', 'New Reservation Added Succesfully');
