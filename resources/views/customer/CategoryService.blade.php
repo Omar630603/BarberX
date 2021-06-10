@@ -35,10 +35,6 @@
                             <img src="{{asset('storage/'.$cs->image)}}" alt="Image">
                         </div>
                         <h3>{{$cs->name}}</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit
-                            non
-                        </p>
                         <a class="btn" href="{{route('serviceCustomer')}}">Learn More</a>
                     </div>
                 </div>

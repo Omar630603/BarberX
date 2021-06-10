@@ -49,7 +49,6 @@
                         There are three main services that we offer, namely Hair Cut, Bread Style, Color & Wash. Come and try it yourself and
                         your hair will be trendy. Don't forget Your Hair Your Style.
                     </p>
-                    <a class="btn" href="">Learn More</a>
                 </div>
             </div>
         </div>
