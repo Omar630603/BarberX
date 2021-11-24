@@ -40,14 +40,14 @@ class CategoryServiceController extends Controller
             'name' => 'required',
             'image' => 'nullable',
         ]);
-
+        $categoryService = new CategoryService;
         if ($request->file('image')) {
             $image = $request->file('image')->store('images', 'public');
             $categoryService->image = $image;
         }
         // dd($image);
 
-        $categoryService = new CategoryService;
+
         $categoryService->name = $request->get('name');
         $categoryService->save();
 
@@ -84,8 +84,8 @@ class CategoryServiceController extends Controller
 
         if ($request->file('image')) {
             if ($categoryService->image && file_exists(storage_path('app/public/' . $categoryService->image))) {
-                if($categoryService->image !== 'images/serviceCategoryDefault.jpg'){
-                Storage::delete('public/' . $categoryService->image);
+                if ($categoryService->image !== 'images/serviceCategoryDefault.jpg') {
+                    Storage::delete('public/' . $categoryService->image);
                 }
                 $image = $request->file('image')->store('images', 'public');
                 $categoryService->image = $image;
@@ -103,8 +103,8 @@ class CategoryServiceController extends Controller
     public function destroy($idcs)
     {
         $categoryService = CategoryService::where('category_service_id', $idcs)->first();
-        if($categoryService->image !== 'images/serviceCategoryDefault.jpg'){
-        Storage::delete('public/' . $categoryService->image);
+        if ($categoryService->image !== 'images/serviceCategoryDefault.jpg') {
+            Storage::delete('public/' . $categoryService->image);
         }
         $categoryService->delete();
         return redirect()->route('categoryService.index')
