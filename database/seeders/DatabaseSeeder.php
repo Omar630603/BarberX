@@ -15,10 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user')->insert([
-            'name' => 'Administrator',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('password'),
-        ]);
+        $this->call(UserSeeder::class);
+        $this->call(EmployeeSeeder::class);
+        $this->call(messageSeeder::class);
+        $this->call(serviceCategorySeeder::class);
     }
 }
