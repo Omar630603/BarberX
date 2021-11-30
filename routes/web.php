@@ -32,6 +32,10 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+Route::group(['middleware' => ['AdminAccess']], function () {
+    Route::get('/admin/home', [HomeController::class, 'index'])->name('admin.home');
+});
+
 // Admin Route
 Route::get('/admin', function () {
     return redirect()->route('login');

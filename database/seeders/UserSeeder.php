@@ -8,27 +8,28 @@ use Hash;
 
 class UserSeeder extends Seeder
 {
-    
+
     public function run()
     {
-        
-       $users =  [
-           [
+
+        $users =  [
+            [
                 'name' => 'Omar Abdul R.A',
                 'email' => 'admin1@gmail.com',
                 'username' => 'omar',
-                'password' =>Hash::make('admin')
+                'password' => Hash::make('admin'),
+                'is_admin' => true
             ],
             [
                 'name' => 'Widiareta Safitri',
                 'email' => 'admin2@gmail.com',
                 'username' => 'widi',
-                'password' =>Hash::make('admin')
-                
-            ],   
-          ];
+                'password' => Hash::make('admin'),
+                'is_admin' => true
 
-          User::insert($users);
+            ],
+        ];
 
+        User::insert($users);
     }
 }

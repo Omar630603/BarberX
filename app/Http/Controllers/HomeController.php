@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Models\Service;
 use App\Models\CategoryService;
 use App\Models\Employee;
-
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -27,12 +26,11 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   
-        $msg = Message::where('show', 1)->get();
-        $employee = Employee::get();
-        $service = Service::get();
-        $serviceCategory = CategoryService::get();
-        dd($serviceCategory);
-        return view('home', compact('msg', 'employee', 'service', 'serviceCategory'));
+    {
+        if (Auth::user()->is_admin == 1) {
+            return redirect()->route('reservation.index');
+        } else {
+            return redirect('/');
+        }
     }
 }
