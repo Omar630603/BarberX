@@ -29,8 +29,14 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
-        return $user->createToken($request->device_name)->plainTextToken;
+        if (!$user) {
+            throw ValidationException::withMessages([
+                'name' => ['There is something wrong with your input.'],
+                'email' => ['There is something wrong with your input.'],
+            ]);
+        } else {
+            return $user->createToken($request->device_name)->plainTextToken;
+        }
     }
 
     public function login(Request $request)
@@ -44,7 +50,7 @@ class AuthController extends Controller
         $user = User::where('email', $request->login)
             ->orwhere('username', $request->login)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password) || $user->is_admin) {
             throw ValidationException::withMessages([
                 'login' => ['The provided credentials are incorrect.'],
             ]);
