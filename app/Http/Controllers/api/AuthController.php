@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +20,6 @@ class AuthController extends Controller
             'phone' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:user',
             'password' => ['required', 'confirmed', Password::defaults()],
-            'device_name' => 'required',
         ]);
 
         $user = User::create([
@@ -35,7 +35,9 @@ class AuthController extends Controller
                 'email' => ['There is something wrong with your input.'],
             ]);
         } else {
-            return $user->createToken($request->device_name)->plainTextToken;
+            $services = Service::all();
+            $data = array($user, $services);
+            return $data;
         }
     }
 
@@ -44,7 +46,6 @@ class AuthController extends Controller
         $request->validate([
             'login' => 'required',
             'password' => 'required',
-            'device_name' => 'required',
         ]);
 
         $user = User::where('email', $request->login)
@@ -55,8 +56,9 @@ class AuthController extends Controller
                 'login' => ['The provided credentials are incorrect.'],
             ]);
         }
-
-        return $user->createToken($request->device_name)->plainTextToken;
+        $services = Service::all();
+        $data = array($user, $services);
+        return $data;
     }
 
     public function logout(Request $request)
