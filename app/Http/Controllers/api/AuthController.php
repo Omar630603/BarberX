@@ -71,4 +71,27 @@ class AuthController extends Controller
 
         return response()->noContent();
     }
+
+
+    public function updateDataAkun($id, Request $request)
+    {
+        $request->validate([
+            'username' => 'nullable',
+            'email' => 'nullable',
+            'phone' => 'nullable',
+
+        ]);
+        $user = User::where('user_id', $id)->first();
+        $user->username = $request->get('username');
+        $user->name = $request->get('username');
+        $user->email = $request->get('email');
+        $user->phone = $request->get('phone');
+
+        $user->save();
+        $services = Service::all();
+
+        return array($user, $services);
+
+        
+    }
 }

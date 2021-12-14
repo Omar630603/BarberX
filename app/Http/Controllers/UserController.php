@@ -155,4 +155,8 @@ class UserController extends Controller
         $serviceCategory = CategoryService::get();
         return view('home', compact('msg', 'employee', 'service', 'serviceCategory'));
     }
+
+    
+
+    
 }
