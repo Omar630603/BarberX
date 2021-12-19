@@ -76,9 +76,9 @@ class AuthController extends Controller
     public function updateDataAkun($id, Request $request)
     {
         $request->validate([
-            'username' => 'nullable',
-            'email' => 'nullable',
-            'phone' => 'nullable',
+            'username' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
 
         ]);
         $user = User::where('user_id', $id)->first();
@@ -86,12 +86,16 @@ class AuthController extends Controller
         $user->name = $request->get('username');
         $user->email = $request->get('email');
         $user->phone = $request->get('phone');
-
-        $user->save();
         $services = Service::all();
-
-        return array($user, $services);
-
-        
+        if (!$user->save()) {
+            $services = Service::all();
+            $data = array($user, $services);
+            return $data;
+        } else {
+            $services = Service::all();
+            $data = array($user, $services);
+            return $data;
+        }
+        // return array($user, $services);
     }
 }
