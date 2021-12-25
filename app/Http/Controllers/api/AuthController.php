@@ -96,6 +96,25 @@ class AuthController extends Controller
             $data = array($user, $services);
             return $data;
         }
-        // return array($user, $services);
+    }
+
+    public function updatePassword($id, Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'confirmed', Password::defaults()],
+
+        ]);
+        $user = User::where('user_id', $id)->first();
+        $user->password = Hash::make($request->get('password'));
+        $services = Service::all();
+        if (!$user->save()) {
+            $services = Service::all();
+            $data = array($user, $services);
+            return $data;
+        } else {
+            $services = Service::all();
+            $data = array($user, $services);
+            return $data;
+        }
     }
 }
