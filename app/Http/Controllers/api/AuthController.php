@@ -101,20 +101,39 @@ class AuthController extends Controller
     public function updatePassword($id, Request $request)
     {
         $request->validate([
+            'oldPassowed' => 'required',
             'password' => ['required', 'confirmed', Password::defaults()],
 
         ]);
         $user = User::where('user_id', $id)->first();
-        $user->password = Hash::make($request->get('password'));
-        $services = Service::all();
-        if (!$user->save()) {
+        if ($request->oldPassowed == $request->password) {
+            throw ValidationException::withMessages([
+                'password' => ['Password tidak dapat diubah karena password yang lama sama yang baru'],
+            ]);
             $services = Service::all();
             $data = array($user, $services);
             return $data;
         } else {
-            $services = Service::all();
-            $data = array($user, $services);
-            return $data;
+            if (Hash::check($request->oldPassowed, $user->password)) {
+                $user->password = Hash::make($request->get('password'));
+                $services = Service::all();
+                if (!$user->save()) {
+                    $services = Service::all();
+                    $data = array($user, $services);
+                    return $data;
+                } else {
+                    $services = Service::all();
+                    $data = array($user, $services);
+                    return $data;
+                }
+            } else {
+                throw ValidationException::withMessages([
+                    'password' => ['Password yang lama tidak sama.'],
+                ]);
+                $services = Service::all();
+                $data = array($user, $services);
+                return $data;
+            }
         }
     }
 }
