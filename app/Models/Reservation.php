@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Service;
-use App\Models\Customer;
 use App\Models\ReservationStatus;
 
 class Reservation extends Model
@@ -25,15 +24,14 @@ class Reservation extends Model
     }
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'customer_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
     protected $casts = [
         'reservation_time' => 'datetime',
     ];
 
-     public function reservationStatus()
+    public function reservationStatus()
     {
         return $this->hasOne(ReservationStatus::class, 'reservation_code');
     }
-
 }

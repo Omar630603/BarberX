@@ -13,3 +13,5 @@ Route::post('/auth/logout', [\App\Http\Controllers\Api\AuthController::class, 'l
 
 Route::put('/akun/editData/{id}', [\App\Http\Controllers\Api\AuthController::class, 'updateDataAkun']);
 Route::put('/akun/change/password/{id}', [\App\Http\Controllers\Api\AuthController::class, 'updatePassword']);
+
+Route::post('/reservasi/add/reservations', [\App\Http\Controllers\Api\ReservationController::class, 'store']);
