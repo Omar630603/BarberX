@@ -15,7 +15,7 @@ class Reservation extends Model
 
     protected $fillable = [
         'reservation_code',
-        'customer_id',
+        'user_id',
         'service_id',
     ];
     public function service()
@@ -26,9 +26,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    protected $casts = [
-        'reservation_time' => 'datetime',
-    ];
+    // protected $casts = [
+    //     'reservation_time' => 'datetime',
+    // ];
 
     public function reservationStatus()
     {

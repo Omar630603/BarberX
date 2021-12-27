@@ -11,10 +11,38 @@ use Illuminate\Http\Request;
 use App\Mail\Reservation as MailReservation;
 use DateTime;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Validation\ValidationException;
 
 class ReservationController extends Controller
 {
+    public function index($id)
+    {
+        $reservations = Reservation::select(
+            'reservation.reservation_id',
+            'reservation.reservation_code',
+            'reservation.user_id',
+            'reservation.service_id',
+            'reservation.reservation_time',
+            'reservation_status.status',
+            'reservation_status.price',
+            'reservation.created_at',
+            'reservation.updated_at',
+        )->join(
+            'reservation_status',
+            'reservation.reservation_code',
+            '=',
+            'reservation_status.reservation_code'
+        )->where(
+            'reservation.user_id',
+            $id
+        )->groupBy(
+            'reservation.reservation_code'
+        )->orderBy(
+            'reservation.reservation_time',
+            'desc'
+        )->get();
+
+        return $reservations;
+    }
     public function store(Request $request)
     {
         $request->validate([
