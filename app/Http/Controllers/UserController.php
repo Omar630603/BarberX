@@ -14,14 +14,15 @@ use Auth;
 
 class UserController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         $search = $request->get('search');
         if ($request->get('search')) {
-            $admins = User::search(['name', 'email'], $search)->get();
+            echo $search;
+            $admins = User::where('name', $search)->Where('is_admin', true)->get();
         } else {
-            $admins = User::get();
+            $admins = User::where('is_admin', true)->get();
         }
         return view('admin.adminIndex', compact('admins'));
     }
@@ -74,7 +75,7 @@ class UserController extends Controller
         //
     }
 
-    
+
     public function store(Request $request)
     {
         $request->validate([
@@ -98,19 +99,19 @@ class UserController extends Controller
             ->with('success', 'New Admin Added Succesfully');
     }
 
-    
+
     public function show(User $user)
     {
         //
     }
 
-    
+
     public function edit(User $admin)
     {
         return view('admin.adminEdit', ['admin' => $admin]);
     }
 
-   
+
     public function update(Request $request, User $admin)
     {
         $request->validate([
@@ -121,7 +122,7 @@ class UserController extends Controller
         ]);
         if ($request->file('image')) {
             if ($admin->image) {
-                if($admin->image !== 'images/userDefault.jpg'){
+                if ($admin->image !== 'images/userDefault.jpg') {
                     Storage::delete('public/' . $admin->image);
                 }
                 $image = $request->file('image')->store('images', 'public');
@@ -137,11 +138,11 @@ class UserController extends Controller
             ->with('success', 'Admin seccesfully Updated');
     }
 
-    
+
     public function destroy(User $admin)
     {
-        if($admin->image !== 'images/userDefault.jpg'){
-        Storage::delete('public/' . $admin->image);
+        if ($admin->image !== 'images/userDefault.jpg') {
+            Storage::delete('public/' . $admin->image);
         }
         $admin->delete();
         return redirect()->route('admins.index')
@@ -155,8 +156,4 @@ class UserController extends Controller
         $serviceCategory = CategoryService::get();
         return view('home', compact('msg', 'employee', 'service', 'serviceCategory'));
     }
-
-    
-
-    
 }

@@ -13,56 +13,80 @@ class ServiceSeeder extends Seeder
     $services = [
       [
         'category_service_id' => 1,
-        'name' => 'hair cut',
-        'price' => 20000
+        'name' => 'Hair Cut',
+        'price' => 30000,
+        'image' => 'images/price-1.jpg'
       ],
 
       [
         'category_service_id' => 1,
-        'name' => 'hair steam',
-        'price' => 20000
+        'name' => 'Hair Wash',
+        'price' => 10000,
+        'image' => 'images/price-2.jpg'
       ],
       [
         'category_service_id' => 1,
-        'name' => 'wedding cuts',
-        'price' => 50000
+        'name' => 'Hair Color',
+        'price' => 50000,
+        'image' => 'images/price-3.jpg'
+
       ],
       [
-        'category_service_id ' => 2,
-        'name' => 'hair color',
-        'price' => 20000
+        'category_service_id ' => 1,
+        'name' => 'Hair Shave',
+        'price' => 20000,
+        'image' => 'images/price-4.jpg'
       ],
       [
         'category_service_id' => 2,
-        'name' => 'shampoo',
-        'price' => 20000
+        'name' => 'Hair Straight',
+        'price' => 40000,
+        'image' => 'images/price-5.jpg'
       ],
       [
         'category_service_id' => 2,
-        'name' => 'hair wash',
-        'price' => 20000
+        'name' => 'Facial',
+        'price' => 25000,
+        'image' => 'images/price-6.jpg'
       ],
       [
-        'category_service_id' => 3,
-        'name' => 'bread trim',
-        'price' => 20000
+        'category_service_id' => 2,
+        'name' => 'Shampoo',
+        'price' => 5000,
+        'image' => 'images/price-7.jpg'
       ],
       [
-        'category_service_id' => 3,
-        'name' => 'bread shave',
-        'price' => 20000
+        'category_service_id' => 2,
+        'name' => 'Beard Trim',
+        'price' => 15000,
+        'image' => 'images/price-8.jpg'
       ],
 
       [
         'category_service_id' => 3,
-        'name' => 'wedding breads',
-        'price' => 20000
+        'name' => 'Beard Shave',
+        'price' => 10000,
+        'image' => 'images/price-9.jpg'
       ],
 
       [
         'category_service_id' => 3,
-        'name' => 'wedding breadsss',
-        'price' => 20000
+        'name' => 'Wedding Cut',
+        'price' => 70000,
+        'image' => 'images/price-10.jpg'
+      ],
+      [
+        'category_service_id' => 3,
+        'name' => 'Clean Up',
+        'price' => 35000,
+        'image' => 'images/price-11.jpg'
+      ],
+
+      [
+        'category_service_id' => 3,
+        'name' => 'Massage',
+        'price' => 10000,
+        'image' => 'images/price-12.jpg'
       ],
     ];
 

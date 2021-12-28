@@ -91,6 +91,20 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="password" class="col-sm-3 col-form-label">Password</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" id="password" placeholder="Enter Password"
+                                name="password">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="confirmPassword" class="col-sm-3 col-form-label">Confirm Password</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" id="confirmPassword"
+                                placeholder="Enter Password Confirmation" name="password_confirmation">
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-3 col-form-label" for="image">Photo</label>
                         <div class="col-sm-8">
                             <input type="file" class="form-control" id="image" placeholder="Upload Image" name="image">
@@ -129,10 +143,10 @@
                             <td><img width="50px" height="50px" src="{{asset('storage/'.$customer->image) }}"></td>
                             <td style="display: flex">
                                 <a type="button" class="btn btn-warning"
-                                    href="{{ route('customer.edit', $customer->customer_id) }}"><i
+                                    href="{{ route('customer.edit', $customer->user_id) }}"><i
                                         class="ti-marker-alt"></i></a>
                                 <form style="margin-left: 5px"
-                                    action="{{ route('customer.destroy', $customer->customer_id) }}" method="POST">
+                                    action="{{ route('customer.destroy', $customer->user_id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger"><i class="ti-trash"></i></button>

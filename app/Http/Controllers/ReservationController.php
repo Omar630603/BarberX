@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Service;
 use App\Models\Reservation;
 use App\Models\ReservationStatus;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -70,11 +71,10 @@ class ReservationController extends Controller
         if (empty($service_id)) {
             if ($request->get('customer')) {
                 return redirect()->route('reservationCustomer')
-                ->with('failr', 'Check the service');
-            }
-            else{
+                    ->with('failr', 'Check the service');
+            } else {
                 return redirect()->route('reservation.index')
-                ->with('fail', 'Check the service');
+                    ->with('fail', 'Check the service');
             }
         } else {
             $request->validate([
@@ -237,7 +237,7 @@ class ReservationController extends Controller
         }
     }
 
-    public function updateByCustomer(Request $request, Reservation $reservation, Customer $customer)
+    public function updateByCustomer(Request $request, Reservation $reservation, User $customer)
     {
         $request->validate([
             'name' => 'required',
@@ -248,7 +248,9 @@ class ReservationController extends Controller
         ]);
         if ($request->file('image')) {
             if ($customer->image) {
-                Storage::delete('public/' . $customer->image);
+                if ($customer->image !== 'images/userDefault.jpg') {
+                    Storage::delete('public/' . $customer->image);
+                }
             }
             $image = $request->file('image')->store('images', 'public');
             $customer->image = $image;
