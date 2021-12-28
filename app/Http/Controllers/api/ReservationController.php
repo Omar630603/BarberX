@@ -138,4 +138,18 @@ class ReservationController extends Controller
             $length_of_string
         );
     }
+
+    public function delete($code)
+    {
+       
+        try {
+            $reservations = Reservation::where('reservation_code', $code)->get();
+            foreach ($reservations as $r) {
+                $r->delete();
+            }
+            return 'true';
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
 }

@@ -17,3 +17,4 @@ Route::put('/akun/change/password/{id}', [\App\Http\Controllers\Api\AuthControll
 Route::get('/reservations/{id}', [\App\Http\Controllers\Api\ReservationController::class, 'index']);
 Route::get('/reservations/details/{id}', [\App\Http\Controllers\Api\ReservationController::class, 'details']);
 Route::post('/reservasi/add/reservations', [\App\Http\Controllers\Api\ReservationController::class, 'store']);
+Route::delete('/reservasi/delete/reservation/{code}', [\App\Http\Controllers\Api\ReservationController::class, 'delete']);
