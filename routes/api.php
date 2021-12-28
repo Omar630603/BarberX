@@ -15,4 +15,5 @@ Route::put('/akun/editData/{id}', [\App\Http\Controllers\Api\AuthController::cla
 Route::put('/akun/change/password/{id}', [\App\Http\Controllers\Api\AuthController::class, 'updatePassword']);
 
 Route::get('/reservations/{id}', [\App\Http\Controllers\Api\ReservationController::class, 'index']);
+Route::get('/reservations/details/{id}', [\App\Http\Controllers\Api\ReservationController::class, 'details']);
 Route::post('/reservasi/add/reservations', [\App\Http\Controllers\Api\ReservationController::class, 'store']);

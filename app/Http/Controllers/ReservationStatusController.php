@@ -9,43 +9,43 @@ use PDF;
 
 class ReservationStatusController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         $search = $request->get('search');
         if ($request->get('search')) {
             $reservationStatus = ReservationStatus::search(['reservation_code', 'price'], $search)->get();
         } else {
-            $reservationStatus = ReservationStatus::get();;
+            $reservationStatus = ReservationStatus::all();
         }
-        return view ('admin.reservationStatusIndex', compact('reservationStatus', $reservationStatus));
+        return view('admin.reservationStatusIndex', compact('reservationStatus'));
     }
 
-    
+
     public function create()
     {
         //
     }
 
-   
+
     public function store(Request $request)
     {
         //
     }
 
-   
+
     public function show(ReservationStatus $reservationStatus)
     {
         //
     }
 
-    
+
     public function edit(ReservationStatus $reservationStatus)
     {
         //
     }
 
-    
+
     public function update(Request $request, $idrStatus)
     {
         $request->validate([
@@ -60,22 +60,23 @@ class ReservationStatusController extends Controller
             ->with('success', 'Status Successfully Updated');
     }
 
-    
+
     public function destroy($idrStatus)
     {
         $code = ReservationStatus::where('reservation_status_id', $idrStatus)->value('reservation_code');
         $reservations = Reservation::where('reservation_code', $code)->get();
         foreach ($reservations as $r) {
-                $r->delete();
-            }
+            $r->delete();
+        }
         return redirect()->route('reservationStatus.index')
             ->with('success', 'Reservation Status seccesfully Deleted');
     }
 
-    public function print_pdf(){
+    public function print_pdf()
+    {
 
         $reservationStatus = ReservationStatus::with('reservation')->get();
-        $pdf = PDF::loadview('admin.print_pdf', ['reservationStatus'=>$reservationStatus]);
+        $pdf = PDF::loadview('admin.print_pdf', ['reservationStatus' => $reservationStatus]);
         return $pdf->stream();
     }
 }

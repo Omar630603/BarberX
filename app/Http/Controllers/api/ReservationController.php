@@ -43,6 +43,35 @@ class ReservationController extends Controller
 
         return $reservations;
     }
+    public function details($id)
+    {
+        $reservations = Reservation::select(
+            'reservation.reservation_id',
+            'reservation.reservation_code',
+            'reservation.user_id',
+            'service.name as service',
+            'service.price as servicePrice',
+            'reservation.reservation_time',
+            'reservation_status.status',
+            'reservation_status.price as totalPrice',
+            'reservation.created_at',
+            'reservation.updated_at',
+        )->join(
+            'service',
+            'reservation.service_id',
+            '=',
+            'service.service_id'
+        )->join(
+            'reservation_status',
+            'reservation.reservation_code',
+            '=',
+            'reservation_status.reservation_code'
+        )->where(
+            'reservation.reservation_code',
+            $id
+        )->get();
+        return $reservations;
+    }
     public function store(Request $request)
     {
         $request->validate([
